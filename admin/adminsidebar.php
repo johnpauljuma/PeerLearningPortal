@@ -1,10 +1,9 @@
 
-    <style>
+<style>
         /* Sidebar Styles */
         .sidebar {
             height: 100vh;
             margin-top: 100px;
-            margin-bottom: 20px;
             width: 12%;
             position: fixed;
             top: 0;
@@ -13,7 +12,6 @@
             padding-top: 20px;
             display: block;
             background-color: darkgray;
-            overflow-y: auto;
         }
 
         /* Profile Picture Styles */
@@ -61,7 +59,7 @@
             margin: 0;
             display: flex;
             position: fixed;
-            bottom: 4%;
+            bottom: 0;
             font-weight: bolder;
         }
     </style>
