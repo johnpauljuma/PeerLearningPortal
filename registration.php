@@ -1,6 +1,5 @@
 <?php 
 include './includes/header.php';
-include './includes/sidebar.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +17,18 @@ include './includes/sidebar.php';
         }
         .container {
             width: 30%;
-            height: 80%;
+            height: 100vh;
             margin:  auto;
+            margin-bottom: 2em;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            
         }
         form{
             padding: 10px;
+            height: fit-content;
+            
         }
         h2 {
             text-align: center;
@@ -37,7 +40,8 @@ include './includes/sidebar.php';
         }
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"]
+        {
             width: 70%;
             padding: 10px;
             margin-bottom: 10px;
@@ -51,6 +55,14 @@ include './includes/sidebar.php';
             padding: 10px 20px;
             border-radius: 3px;
             cursor: pointer;
+            font-weight: bold;
+        }
+        select{
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
             font-weight: bold;
         }
     </style>
@@ -68,14 +80,22 @@ include './includes/sidebar.php';
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             
+            <label for="user_role">User Role:</label>
+            <select id="user_role" name="user_role">
+                <option value="tutee">Tutee</option>
+                <option value="tutor">Tutor</option>
+            </select>
+
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
             <label for="confirm_password">Confirm Password:</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
             
-            <div><button type="submit">Register</button></div>
-        </form>
+            <div><button type="submit" name="register">Register</button></div>
+
+        </form>            
+        <div style="float: right; margin: 10px">Already have an account?   <a href="login.php">Login</a></div>
     </div>
 </body>
 </html>
