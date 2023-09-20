@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar</title>
+
     <style>
         /* Sidebar Styles */
         .sidebar {
@@ -52,8 +47,12 @@
         .active {
             background-color: #555;
         }
+        .logout-option {
+            margin-top: auto; /* Push the logout option to the bottom */
+            padding-bottom: 20px;
+        }
     </style>
-</head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -71,6 +70,8 @@
         <a href="#" class="sidebar-option">Option 3</a>
         <a href="#" class="sidebar-option">Option 4</a>
         <a href="#" class="sidebar-option">Option 5</a>
+
+        <a href="logout.php" class="sidebar-option logout-option">Logout</a>
     </div>
 </body>
 </html>

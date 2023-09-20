@@ -1,30 +1,26 @@
 <?php
-session_start();
-$message = "";
+    include './includes/header.php';
+    session_start();
+    $message="";
+    if(count($_POST)>0) {
+        $con = mysqli_connect('127.0.0.1:3306','root','','student') or die('Unable To connect');
+        $result = mysqli_query($con,"SELECT * FROM tblregistration WHERE Student_ID='" . $_POST["std_id"] . "' and password = '". $_POST["password"]."'");
+        $row  = mysqli_fetch_array($result);
+        
+        if(is_array($row)) {
+        
+            echo "<script>
+        alert('Login successful!')
+        window.location.href = 'index.php';
+        </script>";
 
-if (isset($_POST['submit'])) {
-    $con = mysqli_connect('127.0.0.1:3306', 'root', '', 'files') or die('Unable To connect');
-    $result = mysqli_query($con, "SELECT * FROM tblemployees WHERE EmpId='" . $_POST["EmpId"] . "'");
-
-    if ($row = mysqli_fetch_array($result)) {
-        // Verify the password
-        if (password_verify($_POST["password"], $row["password"])) {
-            $_SESSION["id"] = $row['id'];
-            $_SESSION["EmpId"] = $row['EmpId'];
-            $_SESSION['employee_name'] = $row['FirstName'] . ' ' . $row['LastName'];
-
-            // Redirect to the index.php page or any other desired page
-            header("Location: index.php");
         } else {
-            $message = "Invalid Password!";
+         $message = "Invalid Username or Password!";
         }
-    } else {
-        $message = "Invalid Username!";
     }
-
-    mysqli_close($con);
-}
+    
 ?>
+<!-- The rest of your HTML remains unchanged -->
 
 
 <html>
@@ -122,7 +118,7 @@ if (isset($_POST['submit'])) {
     <div class="message"><?php if($message!="") { echo $message; } ?></div>
         <br>
         <div><h3>Login</h3></div>
-        <input type="text" name="EmpId" placeholder="Student ID">
+        <input type="text" name="std_id" placeholder="Student ID">
         <br>
         <br>
         <input type="password" name="password" placeholder="Password">

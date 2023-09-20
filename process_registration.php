@@ -23,17 +23,17 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'];
 
     // Hash the password for security (you should use a stronger hashing method in production)
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Create an SQL insert query
-    $sql = "INSERT INTO tblregistration (Student_ID, Full_Name, Email, User_Role, Password) VALUES ('$std_id', '$full_name', '$email', '$user_role', '$hashed_password')";
+    $sql = "INSERT INTO tblregistration (Student_ID, Full_Name, Email, User_Role, Password) VALUES ('$std_id', '$full_name', '$email', '$user_role', '$password')";
 
     // Perform the insert operation
     if (mysqli_query($conn, $sql)) {
         // Registration successful
         echo "<script>
         alert('Registration successful!')
-        window.location.href = 'index.php';
+        window.location.href = 'login.php';
         </script>";
     } else {
         // Registration failed
