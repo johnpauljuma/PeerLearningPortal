@@ -3,11 +3,12 @@
         /* Sidebar Styles */
         .sidebar {
             height: 100vh;
+            margin-top: 100px;
             width: 12%;
             position: fixed;
             top: 0;
             left: 0;
-            box-shadow: 5px  0 5px  0;
+            box-shadow: 5px  0 0  0;
             padding-top: 20px;
             display: block;
             background-color: darkgray;
@@ -48,8 +49,18 @@
             background-color: #555;
         }
         .logout-option {
-            margin-top: auto; /* Push the logout option to the bottom */
+            margin-top: auto; 
             padding-bottom: 20px;
+            display: flex;
+                    
+            
+        }
+        .logout{
+            margin: 0;
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            font-weight: bolder;
         }
     </style>
 
@@ -71,7 +82,8 @@
         <a href="#" class="sidebar-option">Option 4</a>
         <a href="#" class="sidebar-option">Option 5</a>
 
-        <a href="logout.php" class="sidebar-option logout-option">Logout</a>
+        <div class="logout"><a href="logout.php" class="sidebar-option logout-option">Logout</a></div>
+        
     </div>
 </body>
 </html>

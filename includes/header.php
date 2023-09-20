@@ -4,16 +4,18 @@
 
     header {
             width: 100%;
-            padding: 10px;
+            height: 100px;
+            top: 0;
+            left: 0;
             text-align: center;
+            background-color: grey;
+            margin: 0;
             
-            margin: auto;
-            height: 80px;
-            
+            position: fixed;
             
         }
-        .topheader{
-                
+        body{
+             padding-top: 100px;   
         }
 
 
