@@ -1,6 +1,6 @@
-<?php include 'adminheader.php'?>
-<?php include 'adminsidebar.php'?>
-<?php include 'adminfooter.php'?>
+<?php include 'admin_header.php'?>
+<?php include 'admin_sidebar.php'?>
+<?php include 'admin_footer.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

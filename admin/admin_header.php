@@ -19,7 +19,7 @@
              padding-top: 100px;  
              position: relative; 
              height: 100vh;
-             background-color: blue;
+            
              margin-bottom: 2em;
         }
         .image{
