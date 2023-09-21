@@ -12,6 +12,7 @@ include './includes/footer.php';
     <style>
         body h1 {
             margin-left: 12%;
+           
         }
     </style>
 </head>

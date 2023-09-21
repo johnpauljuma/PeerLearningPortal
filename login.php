@@ -1,5 +1,7 @@
 <?php
     include './includes/header.php';
+    include './includes/sidebar.php';
+    include './includes/footer.php';
     session_start();
     $message="";
     if(count($_POST)>0) {

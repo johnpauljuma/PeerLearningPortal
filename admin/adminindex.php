@@ -1,4 +1,6 @@
-<?php include '../includes/header.php'?>
+<?php include 'adminheader.php'?>
+<?php include 'adminsidebar.php'?>
+<?php include 'adminfooter.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

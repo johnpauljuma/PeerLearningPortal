@@ -52,7 +52,7 @@
 
 </style>
 <header>
-        <div class="image"><img src="./images/profile_image.png" alt="User Profile" class="profile-pic"></div>
+        <div class="image"><img src="../images/profile_image.png" alt="User Profile" class="profile-pic"></div>
         
       <div>John Doe</div>
            
