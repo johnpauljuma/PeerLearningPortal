@@ -1,4 +1,7 @@
-
+<head>
+<script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous">
+    </script>
+</head>
     <style>
         /* Sidebar Styles */
         .sidebar {
@@ -13,8 +16,8 @@
             padding-top: 20px;
             display: flex;
             flex-direction: column;
-            background-color: orange;
             overflow-y: scroll;
+            background-color: #555;
         }
 
 
@@ -22,14 +25,14 @@
         .sidebar-option {
             padding: 15px;
             text-align: center;
-            
+            font-weight: bold;
             text-decoration: none;
             display: block;
         }
 
         /* Highlighted Option Style */
         .active {
-            background-color: #555;
+            background-color: 0;
         }
         .logout-option {
             margin-top: auto; 
@@ -44,13 +47,34 @@
             bottom: 4%;
             font-weight: bolder;
         }
+        .icon{
+            height: 30px;
+            width: 30px;
+        }
+        .sidebar_container{
+            display: flex;
+        }
+        .sidebar_child1{
+            display: inline-flex;
+            margin: 0;
+            
+            padding: 0;
+        }
+        .sidebar_child2{
+            display: inline-flex;
+            margin: 0;
+            font-weight: bold;
+        }
     </style>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
         <div>
-        <a href="#" class="sidebar-option">Option 1</a>
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i ><img src="./images/apply_icon.png"class="icon" alt=""></i></div>
+        <div class="child2"><a href="apply.php" class="sidebar-option">Apply</a></div>
+        </div>
         <a href="#" class="sidebar-option">Option 2</a>
         <a href="#" class="sidebar-option">Option 3</a>
         <a href="#" class="sidebar-option">Option 4</a>

@@ -19,7 +19,6 @@
              padding-top: 100px;  
              position: relative; 
              height: 100vh;
-            
              margin-bottom: 2em;
         }
         .image{
@@ -30,6 +29,7 @@
                 width: fit-content;
                 float: left;
                 padding: 10px;
+                margin-left: 10px;
         }
         img{
                 height: 50px;
@@ -37,8 +37,12 @@
                 border-radius: 50%;
         }
         p{
-                display: block;
-                position: relative;
+                margin-top: 60px;
+                margin-left: -10px;
+                display: flex;
+                float: left;
+                position: absolute;
+                font-weight: bold;
         }
         .h1{
                 display: inline-flex;
@@ -52,9 +56,9 @@
 
 </style>
 <header>
-        <div class="image"><img src="../images/profile_image.png" alt="User Profile" class="profile-pic"></div>
+        <div class="image"><img src="../images/profile_image.png" alt="User Profile" class="profile-pic"><p>Admin</p></div>
         
-      <div>John Doe</div>
+      
            
         <div class="h1"><h1>Student Learning Portal</h1></div>
 </header>
