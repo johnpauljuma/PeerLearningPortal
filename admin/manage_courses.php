@@ -165,6 +165,14 @@
                 <td><a href="#">Edit</a></td>
                 <td><input type="submit" value="Delete"></td>
             </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            
         </table>
     </div>
 </body>

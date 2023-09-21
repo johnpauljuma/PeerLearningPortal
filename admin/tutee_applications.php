@@ -1,174 +1,185 @@
+<?php include 'admin_header.php'?>
+<?php include 'admin_sidebar.php'?>
+<?php include 'admin_footer.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Manage Employees</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Admin | manage courses</title>
     <style>
-        /* Reset some default styles */ 
-       body, h1, h2, h3, p, ul, li {
+        .container {
+            height: fit-content;
+            width: fit-content;
+            margin: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 5px 0;
+            border-radius: 10px;
+            border-style: outset;
+        }
+        
+        table {
+            margin: auto;
+            margin-top: 2em;
+            padding: 10px;
+            box-shadow: 0 0 3px 0;
+        }
+
+        th {
+            padding: 5px;
+            text-align: left;
+            box-shadow: 0 0 5px 0;
+        }
+
+        td {
+            border: 1px;
+            margin: 5px;
+            text-align: left;
+            padding: 10px;
+        }
+
+        span {
+            color: red;
+            margin-left: 0;
+            margin-right: 2em;
+        }
+
+        h3 {
             margin: 0;
+            margin-top: 10px;
+            margin-bottom: -10px;
+        }
+
+        .h3 {
+            display: inline-flex;
+            width: 50%;
+        }
+
+        .cover {
+            display: flex;
+            margin-bottom: -20px;
+            margin-top: 1em;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .form_container {
+            display: inline-flex;
+            right: 0;
+            float: right;
+            justify-content: flex-end;
+            width: 100%;
             padding: 0;
         }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        /* Main container */
-        .mn-inner {
-            padding: 20px;
+
+        form {
+            float: right;
+            right: 0;
+            height: 40px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 0;          
+            max-width: 300px;
         }
-        .header{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 0;
-            padding: 2px;
-            margin-top: 5px;
-        }
-        .page-title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 70em; 
-            border-radius: 5px;
-            box-shadow: 0 0 5px 0;
-              
-        }
-        .card-content {
-            padding: 20px;
-            max-width: 100%;
-        }
-        .card-title  {
-            font-size: 20px;
-            margin-bottom: 10px;
-            margin-top: 20px;
-        }
-        /* Table styles */
-        #example {
-            width: 100%;
-            border-collapse: collapse;
-            width: 42em;
-            width: 65em;
-            table-layout: auto;
-            border-radius: 5px;
-            box-shadow: 0 0 5px 0;
-        }
-       
-        th, td {
-            border: 1px ;
-            padding: 8px;
-            text-align: left;
-            max-width: 100%;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        th.fname, td.fname {
-            min-width: 400px; /* Adjust the minimum width as needed */
-        }
-        th.department, td.department {
-            min-width: 400px; /* Adjust the minimum width as needed */
-        }
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            max-width: 100%;
+
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+            border-radius: 20px 0 0 20px;
             
         }
-        .show-entries select {
-            margin-right: 10px;
+
+        form.example button {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
         }
-        .mn-inner div.hdiv{
-            display: flex;
-            justify-content: center;
-            align-content: center;
+
+        form.example button:hover {
+            background: #0b7dda;
         }
-        .fname {
-            width: fit-content;
+
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 </head>
 <body>
-<div class="header"><h1>Manage Employees</h1></div>
-    <div class="mn-inner">
-             <div class="card">  
-                <div class="card-content">
-                <span class="card-title">Employees Info</span>
-                <div class="table-controls">
-                    <div class="show-entries">
-                        Show 
-                        <select>
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                    </div>
-                    <div class="search-records">
-                         <input type="text" placeholder="Search records">
-                    </div>
-                </div>
-                <table id="example">
-                    <thead>
-                    <tr>
-                            <th>Sr no </th>
-                            <th>Emp Id </th>
-                            <th>Full Name </th>
-                            <th>Department </th>
-                            <th>Status </th>
-                            <th>Reg Date </th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $srNo = 1;
-                        while ($employee = mysqli_fetch_assoc($query)) {
-                        ?>
-                        <tr>
-                            <td><?php echo $srNo; ?></td>
-                            <td><?php echo $employee['EmpId']; ?></td>
-                            <td><?php echo $employee['FirstName'] . ' ' . $employee['LastName']; ?></td>
-                            <td><?php echo $employee['Department']; ?></td>
-                            <td><?php echo ($employee['Status'] == 1) ? 'ACTIVE' : 'INACTIVE'; ?></td>
-                            <td><?php echo $employee['RegDate']; ?></td>
-                            <td>
-                                <a href="editemployee.php?empid=<?php echo $employee['id']; ?>">
-                                    <i class="material-icons">mode_edit</i>
-                                </a>
-                                <a href="manageemployees.php?del=<?php echo $employee['id']; ?>" onclick="return confirm('Are you sure you want to delete this employee?');">
-                                    <i class="material-icons" title="Delete">clear</i>
-                                </a>
-                            </td>
-                        </tr>
-                        <?php
-                            $srNo++;
-                        }
-                        ?>
-                    </tbody>
-                </table>
+    
+        <center><h2>Tutee Applications</h2></center>
+    <div class="container">
+        <div class="cover">
+            <div class="h3"><h3>Student Details</h3></div>
+            <div class="form_container">
+                <form class="example" action="/action_page.php">
+                    <input type="text" placeholder="Search student..." name="search2">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
         </div>
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Year of Study</th>
+                <th>Course</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td>698560</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td>APT2030</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>698560</td>
+                
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td>APT2030</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>698560</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td>APT2030</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>698560</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td>APT2030</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            
+        </table>
     </div>
 </body>
 </html>
