@@ -1,13 +1,17 @@
+echo "<script>
+        alert('Employee Information Updated successfully!')
+        window.location.href = 'profile.php';
+        </script>";
+
 <head>
 <script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous">
     </script>
-</head>
+
     <style>
         /* Sidebar Styles */
         .sidebar {
-            height: 100%;
+            height: 100vh;
             margin-top: 100px;
-            margin-bottom: 20px;
             width: 12%;
             position: fixed;
             top: 0;
@@ -17,7 +21,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: scroll;
-           
+           background-color: grey;
         }
 
 
@@ -44,7 +48,7 @@
         .logout{
             margin: 0;
             display: flex;
-            bottom: 4%;
+            bottom: 0;
             font-weight: bolder;
         }
         .icon{
@@ -73,17 +77,16 @@
             
         }
     </style>
-
+</head>
 <body>
-    <!-- Sidebar -->
+   
     <div class="sidebar">
 
-        <div>
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-user" style="font-size:36px"></i></i></div>
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:36px"></i></div>
         <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Profile</a></div>
         </div>
-        <div>
+        
         <div class="sidebar_container">
         <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:36px"></i></div>
         <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Apply</a></div>
@@ -97,14 +100,12 @@
         <a href="#" class="sidebar-option">Option 4</a>
         <a href="#" class="sidebar-option">Option 5</a>
 
-        <a href="#" class="sidebar-option">Option 11</a>
-        <a href="#" class="sidebar-option">Option 12</a>
-        <a href="#" class="sidebar-option">Option 13</a>
-        <a href="#" class="sidebar-option">Option 14</a>
-        <a href="#" class="sidebar-option">Option 15</a>
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:36px"></i></div>
+        <div class="sidebar_child2"><a href="logout.php" class="sidebar-option">Sign Out</a></div>
         </div>
+        
 
-        <div class="logout"><a href="logout.php" class="sidebar-option logout-option">Logout</a></div>
         
     </div>
 </body>

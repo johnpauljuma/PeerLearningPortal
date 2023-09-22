@@ -1,7 +1,8 @@
 <?php
     include './includes/header.php';
-    include './includes/sidebar.php';
+    //include './includes/sidebar.php';
     include './includes/footer.php';
+
     session_start();
     $message="";
     if(count($_POST)>0) {
@@ -29,13 +30,9 @@
 <head>  
 <title>User Login</title>
 <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
 
         .container {
-            width: 20%;
+            width: 25%;
             margin: 0 auto;
             margin-top: 1em;
             padding: 20px;
@@ -49,8 +46,7 @@
             display: flex; 
             flex-direction: column;
             align-items: center;
-            background-color: orange;
-
+            
         }
 
         .message {

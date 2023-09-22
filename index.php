@@ -10,14 +10,19 @@ include './includes/footer.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <style>
-        body h1 {
-            margin-left: 12%;
-           
+        body{
+          
+            
+            
         }
+        
     </style>
 </head>
+
 <body>
-    
-    <h1>welcome home</h1>
+
+    <h1>Welcome Home</h1>
+
 </body>
+
 </html>

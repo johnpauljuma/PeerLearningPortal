@@ -1,6 +1,6 @@
 <?php 
 include './includes/header.php';
-include './includes/sidebar.php';
+//include './includes/sidebar.php';
 include './includes/footer.php';
 ?>
 <!DOCTYPE html>
@@ -15,6 +15,7 @@ include './includes/footer.php';
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
+            margin-top: 100px;
             padding: 0;
         }
         .container {
