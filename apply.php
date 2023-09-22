@@ -2,6 +2,52 @@
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
+
+
+// Database configuration
+$host = "localhost";
+$username = "root"; 
+$password = ""; 
+$database = "student";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $student_id = $_POST["student_id"];
+    $name = $_POST["name"];
+    $course = $_POST["course"];
+    $major = $_POST["major"];
+    $year = $_POST["year"];
+    $semester_year = $_POST["semester_year"];
+    $concentration = $_POST["concentration"];
+
+    // Prepare and execute SQL query to insert data into applications table
+    $sql = "INSERT INTO applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration)
+            VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>
+        alert('Application Submitted successfully!')
+        window.location.href = 'login.php';
+        </script>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+} else {
+    // If the form was not submitted via POST, handle the situation accordingly
+    echo "<h2>Error: Form was not submitted.</h2>";
+}
+
+// Close the database connection
+$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +127,7 @@ include './includes/footer.php';
     <center><h1>Peer Learning Platform Application</h1></center>
     <div class="container">
     
-    <form action="submit_application.php" method="post">
+    <form action="apply.php" method="post">
         <!-- Student ID -->
         <label for="student_id">Student ID:</label>
         <input type="text" id="student_id" name="student_id" required>

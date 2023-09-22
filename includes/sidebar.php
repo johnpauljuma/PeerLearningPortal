@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: scroll;
-            background-color: #555;
+           
         }
 
 
@@ -53,10 +53,14 @@
         }
         .sidebar_container{
             display: flex;
+            
         }
         .sidebar_child1{
             display: inline-flex;
             margin: 0;
+            margin-left: 10px;
+            margin-top: 10px;
+            
             
             padding: 0;
         }
@@ -64,18 +68,31 @@
             display: inline-flex;
             margin: 0;
             font-weight: bold;
+            margin-right: -10px;
+            padding: 0;
+            
         }
     </style>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
+
         <div>
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i ><img src="./images/apply_icon.png"class="icon" alt=""></i></div>
-        <div class="child2"><a href="apply.php" class="sidebar-option">Apply</a></div>
+        <div class="sidebar_child1"><i class="fa fa-user" style="font-size:36px"></i></i></div>
+        <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Profile</a></div>
         </div>
-        <a href="#" class="sidebar-option">Option 2</a>
+        <div>
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:36px"></i></div>
+        <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Apply</a></div>
+        </div>
+
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:36px"></i></div>
+        <div class="sidebar_child2"><a href="courses.php" class="sidebar-option">Courses</a></div>
+        </div>
         <a href="#" class="sidebar-option">Option 3</a>
         <a href="#" class="sidebar-option">Option 4</a>
         <a href="#" class="sidebar-option">Option 5</a>

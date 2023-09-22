@@ -3,9 +3,9 @@
 if (isset($_POST['register'])) {
     // Define your database connection parameters
     $host = "localhost";
-    $username = "root"; // Change to your database username
-    $password = ""; // Change to your database password
-    $database = "student"; // Change to your database name
+    $username = "root"; 
+    $password = ""; 
+    $database = "student"; 
 
     // Create a database connection
     $conn = mysqli_connect($host, $username, $password, $database);
