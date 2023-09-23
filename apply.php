@@ -35,14 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql) === TRUE) {
         echo "<script>
         alert('Application Submitted successfully!')
-        window.location.href = 'login.php';
+        window.location.href = 'index.php';
         </script>";
-    } else {
+    } /*else {
         echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-} else {
+    }*/
+else {
     // If the form was not submitted via POST, handle the situation accordingly
     echo "<h2>Error: Form was not submitted.</h2>";
+}
 }
 
 // Close the database connection

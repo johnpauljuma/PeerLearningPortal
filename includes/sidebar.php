@@ -1,8 +1,3 @@
-echo "<script>
-        alert('Employee Information Updated successfully!')
-        window.location.href = 'profile.php';
-        </script>";
-
 <head>
 <script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous">
     </script>
