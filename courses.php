@@ -31,7 +31,7 @@ include './includes/footer.php';
             padding: 2px 10px 2px 10px;
         }
         td{
-            padding: 2px 10px 2px 10px;
+            padding: 10px 10px 2px 10px;
         }
     </style>
 </head>

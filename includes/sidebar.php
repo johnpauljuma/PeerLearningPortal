@@ -11,12 +11,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            box-shadow: 5px  0 0  0;
+            box-shadow: 5px  0 0  0 black;
             padding-top: 20px;
             display: flex;
             flex-direction: column;
             overflow-y: scroll;
-           background-color: grey;
+           background-color: blue;
+           color: white;
         }
 
 
@@ -24,9 +25,10 @@
         .sidebar-option {
             padding: 15px;
             text-align: center;
-            font-weight: 100;
+            font-weight: 1000;
             text-decoration: none;
             display: block;
+            color: white;
         }
 
         /* Highlighted Option Style */
@@ -66,7 +68,7 @@
         .sidebar_child2{
             display: inline-flex;
             margin: 0;
-            font-weight: bold;
+            font-weight: 1000;
             margin-right: -10px;
             padding: 0;
             
@@ -100,12 +102,17 @@
     <div class="sidebar">
 
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:30px"></i></div>
-        <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Profile</a></div>
+        <div class="sidebar_child1"><i class="fa fa-home" style="font-size:24px"></i></div>
+        <div class="sidebar_child2"><a href="index.php" class="sidebar-option">Home</a></div>
+        </div>
+
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
+        <div class="sidebar_child2"><a href="profile.php" class="sidebar-option">My Profile</a></div>
         </div>
         
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:30px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
         <div class="sidebar_child2 dropdown" onclick="toggleDropdown(this)"><a href="#" class="sidebar-option">Program &#9662;</a>
             <div class="dropdown-content">
                 <div class="a"><a href="apply.php">Apply</a></div>
@@ -116,7 +123,7 @@
 
         
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:30px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:24px"></i></div>
         <div class="sidebar_child2"><a href="courses.php" class="sidebar-option">Courses</a></div>
         </div>
         <a href="#" class="sidebar-option">Option 3</a>
@@ -124,7 +131,7 @@
         <a href="#" class="sidebar-option">Option 5</a>
 
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:30px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:24px"></i></div>
         <div class="sidebar_child2"><a href="logout.php" class="sidebar-option">Sign Out</a></div>
         </div>
         
