@@ -24,7 +24,7 @@
         .sidebar-option {
             padding: 15px;
             text-align: center;
-            font-weight: bold;
+            font-weight: 100;
             text-decoration: none;
             display: block;
         }
@@ -71,6 +71,28 @@
             padding: 0;
             
         }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            height: fit-content;
+            border-radius: 5px;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 5px;
+        }
+        .a {
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -78,17 +100,23 @@
     <div class="sidebar">
 
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:36px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:30px"></i></div>
         <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Profile</a></div>
         </div>
         
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:36px"></i></div>
-        <div class="sidebar_child2"><a href="apply.php" class="sidebar-option">Apply</a></div>
+        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:30px"></i></div>
+        <div class="sidebar_child2 dropdown" onclick="toggleDropdown(this)"><a href="#" class="sidebar-option">Program &#9662;</a>
+            <div class="dropdown-content">
+                <div class="a"><a href="apply.php">Apply</a></div>
+                <div class="a"><a href="application_history.php">My Applications</a></div>
+            </div>
+        </div>
         </div>
 
+        
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:36px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:30px"></i></div>
         <div class="sidebar_child2"><a href="courses.php" class="sidebar-option">Courses</a></div>
         </div>
         <a href="#" class="sidebar-option">Option 3</a>
@@ -96,12 +124,22 @@
         <a href="#" class="sidebar-option">Option 5</a>
 
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:36px"></i></div>
+        <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:30px"></i></div>
         <div class="sidebar_child2"><a href="logout.php" class="sidebar-option">Sign Out</a></div>
         </div>
         
 
         
     </div>
+    <script>
+        function toggleDropdown(dropdown) {
+            const dropdownContent = dropdown.querySelector(".dropdown-content");
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
