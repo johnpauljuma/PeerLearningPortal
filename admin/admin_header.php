@@ -16,10 +16,11 @@
             
         }
         body{
-             padding-top: 100px;  
+             padding-top: 120px;  
              position: relative; 
              height: 100vh;
              margin-bottom: 2em;
+             margin-left: 13%;
         }
         .image{
                 display: inline-flex;

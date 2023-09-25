@@ -2,6 +2,7 @@
 include './includes/header.php';
 include './includes/sidebar.php';
 
+
 $dbHost = "localhost";
 $dbUser = "username";
 $dbPassword = "";

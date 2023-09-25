@@ -18,8 +18,8 @@
             padding-top: 20px;
             display: flex;
             flex-direction: column;
-            background-color: orange;
-            color: #f9f9f9;
+            background-color: darkblue;
+            color: white;
             overflow-y: scroll;
         }
 
@@ -29,6 +29,7 @@
             text-align: center;
             text-decoration: none;
             display: block;
+            color: white;
         }
 
         /* Highlighted Option Style */
@@ -51,19 +52,23 @@
         /* Dropdown Styles */
         .dropdown {
             position: relative;
-            display: inline-block;
+            display: flex;
+            color: white;
         }
 
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
+            background-color: white;
+            color: white;
+            
             height: fit-content;
             border-radius: 10px;
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
             z-index: 1;
             padding: 10px;
+            margin-top: 3em;
+            margin-left: 5px;
         }
 
         
@@ -93,6 +98,7 @@
             font-weight: 100;
             margin-right: -10px;
             padding: 0;
+            color: white;
             
         }
     </style>
@@ -101,9 +107,20 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div>
-            <a href="admin_index.php" class="sidebar-option">Home</a>
-            <div class="dropdown" onclick="toggleDropdown(this)">
-                <a href="#" class="sidebar-option">Applications &#9662;</a>
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-home" style="font-size:24px"></i></div>
+        <div class="sidebar_child2"><a href="dashboard.php" class="sidebar-option">Home</a></div>
+        </div>
+
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class='fas fa-tachometer-alt' style='font-size:24px'></i></i></div>
+        <div class="sidebar_child2"><a href="dashboard.php" class="sidebar-option">Dashboard</a></div>
+        </div>
+
+        <div class="sidebar_container">
+                <div class="dropdown" onclick="toggleDropdown(this)">
+                <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
+                <div class="sidebar_child2"><a href="#" class="sidebar-option">Students &#9662;</a></div>
                 <div class="dropdown-content">
                     <div class="a"><a href="add_student.php">Add Student</a></div>
                     <div class="a"><a href="tutee_applications.php">Tutee</a></div>
@@ -112,8 +129,10 @@
                     <div class="a"><a href="pending.php">Pending Students</a></div>
                 </div>
             </div>
+        </div>
 
             <div class="dropdown" onclick="toggleDropdown(this)">
+            <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:24px"></i></div>
                 <a href="#" class="sidebar-option">Courses &#9662;</a>
                 <div class="dropdown-content">
                     <div class="a"><a href="add_course.php">Add Course</a></div>
@@ -125,7 +144,7 @@
 
         <div class="sidebar_container">
         <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:30px"></i></div>
-        <div class="sidebar_child2"><a href="#" class="sidebar-option">Sign Out</a></div>
+        <div class="sidebar_child2"><a href="admin_login.php" class="sidebar-option">Sign Out</a></div>
         </div>
     </div>
 

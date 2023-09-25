@@ -112,7 +112,7 @@
         </div>
         
         <div class="sidebar_container">
-        <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
+        <div class="sidebar_child1"><i class='fas fa-clipboard' style='font-size:24px'></i></div>
         <div class="sidebar_child2 dropdown" onclick="toggleDropdown(this)"><a href="#" class="sidebar-option">Program &#9662;</a>
             <div class="dropdown-content">
                 <div class="a"><a href="apply.php">Apply</a></div>
