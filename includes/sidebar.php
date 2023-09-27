@@ -35,19 +35,7 @@
         .active {
             background-color: 0;
         }
-        .logout-option {
-            margin-top: auto; 
-            padding-bottom: 20px;
-            display: flex;
-                    
-            
-        }
-        .logout{
-            margin: 0;
-            display: flex;
-            bottom: 0;
-            font-weight: bolder;
-        }
+        
         .icon{
             height: 30px;
             width: 30px;
@@ -55,6 +43,11 @@
         .sidebar_container{
             display: flex;
             
+        }
+        .sidebar_scontainer{
+            display: flex;
+            bottom: 10px;
+            position: fixed;
         }
         .sidebar_child1{
             display: inline-flex;
@@ -126,18 +119,21 @@
         <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:24px"></i></div>
         <div class="sidebar_child2"><a href="courses.php" class="sidebar-option">Courses</a></div>
         </div>
-        <a href="#" class="sidebar-option">Option 3</a>
-        <a href="#" class="sidebar-option">Option 4</a>
-        <a href="#" class="sidebar-option">Option 5</a>
 
-        <div class="sidebar_container">
+        
+
+
+       
+        <div class="sidebar_scontainer">
         <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:24px"></i></div>
         <div class="sidebar_child2"><a href="logout.php" class="sidebar-option">Sign Out</a></div>
         </div>
-        
 
         
     </div>
+
+   
+
     <script>
         function toggleDropdown(dropdown) {
             const dropdownContent = dropdown.querySelector(".dropdown-content");
@@ -149,4 +145,6 @@
         }
     </script>
 </body>
+
+        
 </html>

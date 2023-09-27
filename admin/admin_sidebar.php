@@ -21,6 +21,7 @@
             background-color: darkblue;
             color: white;
             overflow-y: scroll;
+            
         }
 
         /* Sidebar Option Styles */
@@ -83,13 +84,16 @@
             display: flex;
             
         }
+        .sidebar_scontainer{
+            display: flex;
+            bottom: 10px;
+            position: fixed;
+        }
         .sidebar_child1{
             display: inline-flex;
             margin: 0;
             margin-left: 10px;
             margin-top: 10px;
-            
-            
             padding: 0;
         }
         .sidebar_child2{
@@ -101,11 +105,65 @@
             color: white;
             
         }
+
+        .hamburger {
+            font-size: 36px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+            color: white;
+        }
+
+        @media screen and (max-width: 768px) {
+            body{
+                height: 100vh;
+                width: 100%;
+                padding: 0;
+                margin: auto;
+            }
+            .sidebar{
+                /*overflow: hidden;*/
+                
+                position: absolute;
+                height: auto;
+                width: fit-content;
+                margin-top: 50px;
+                padding-top: 35px;
+                
+            }
+            .sidebar_scontainer{
+                position: relative;
+            }
+
+            .hamburger {
+            display: block;
+        }
+
+        .arrow {
+            display: none;
+        }
+        .hamburger {
+            font-size: 36px;
+            cursor: pointer;
+            position: fixed;
+            top: 50px;
+            left: 40px;
+            z-index: 1;
+            color: white;
+        }
+        }
     </style>
 </head>
 <body>
+<div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
+    
+
         <div>
         <div class="sidebar_container">
         <div class="sidebar_child1"><i class="fa fa-home" style="font-size:24px"></i></div>
@@ -142,7 +200,7 @@
            
         </div>
 
-        <div class="sidebar_container">
+        <div class="sidebar_scontainer">
         <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:30px"></i></div>
         <div class="sidebar_child2"><a href="admin_login.php" class="sidebar-option">Sign Out</a></div>
         </div>
@@ -157,6 +215,20 @@
                 dropdownContent.style.display = "block";
             }
         }
-    </script>
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        var hamburger = document.getElementById("hamburger");
+
+        if (sidebar.style.display === "flex") {
+            sidebar.style.display = "none";
+            
+        } else {
+            sidebar.style.display = "flex"; // Adjust this width as needed
+            
+        }
+    }
+</script>
 </body>
 </html>

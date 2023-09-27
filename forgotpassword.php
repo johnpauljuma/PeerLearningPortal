@@ -1,5 +1,5 @@
 <?php 
-include './includes/header.php';
+//include './includes/header.php';
 
 ?>
 
@@ -27,7 +27,7 @@ include './includes/header.php';
             height: 60%;
             border-radius: 10px;
             border-style: outset;
-            box-shadow: 0 0 20px 5px;
+            box-shadow: 0 0 5px 0px;
             margin: 0 auto;
             margin-top: 3em;
             padding: 10px;

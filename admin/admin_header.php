@@ -54,12 +54,22 @@
                
                 
         }
+        @media screen and (max-width: 768px) {
+                .h1{
+                        font-size: 24px;
+                }
+                header{
+                        width: 100%;
+                        height: 50px;
+                }
+                h1{
+                        font-size: 18px;
+                }
+        }
 
 </style>
 <header>
-        <div class="image"><img src="../images/profile_image.png" alt="User Profile" class="profile-pic"><p>Admin</p></div>
         
-      
            
         <div class="h1"><h1>Student Learning Portal</h1></div>
 </header>
