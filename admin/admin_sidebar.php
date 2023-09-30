@@ -197,7 +197,11 @@
                     <div class="a"><a href="manage_courses.php">Manage Courses</a></div>
                 </div>
             </div>
-           
+        </div>
+
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class='fas fa-tachometer-alt' style='font-size:24px'></i></i></div>
+        <div class="sidebar_child2"><a href="rating_reviews.php" class="sidebar-option">Ratings</a></div>
         </div>
 
         <div class="sidebar_scontainer">

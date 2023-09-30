@@ -16,6 +16,7 @@ header {
         
     }
     body{
+        font-family: tahoma;
         margin-left: 13%; 
         margin-top: 120px;
         margin-bottom: 2em;
@@ -30,19 +31,7 @@ header {
             padding: 10px;
             margin-left: 10px;
     }
-    #img{
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-    }
-    p{
-            margin-top: 60px;
-            margin-left: -10px;
-            display: flex;
-            float: left;
-            position: absolute;
-            font-weight: bold;
-    }
+    
     .h1_header{
             display: inline-flex;
             width: 500px;
@@ -58,8 +47,7 @@ header {
 <body >
 
 <header>
-        <div class="image"><img src="./images/profile_image.png" alt="User Profile" class="profile-pic" id="img"><p>John Doe</p></div>
-           
+         
         <div class="h1_header"><h1>Student Learning Portal</h1></div>
 </header>
     

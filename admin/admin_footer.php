@@ -9,10 +9,11 @@
             display: flex;
             align-items: flex-end;
             justify-content: flex-end; /* Align content to the right */
-            position: fixed;
+            position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
+            
             
         }
     </style>
