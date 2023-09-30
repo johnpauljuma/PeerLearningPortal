@@ -2,30 +2,24 @@
 <html>
 <head>
     <style>
-        /* Footer Styles */
-        .footer {
-            padding: 10px;
+        footer {
             text-align: center;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end; /* Align content to the right */
-            position: absolute;
+            padding: 1px 0 1px 0;
+            margin-top: 1em;
+            width: 100%;
+            max-width: 100%;
             bottom: 0;
-            left: 0;
-            right: 0;
-            
+            color: blue;
+            position: fixed;
             
         }
     </style>
 </head>
 <body>
     
-    
-       <div class="footer">
-       <footer>   
-        <p>&copy; 2023 Student Learning Portal</p>
-        </footer>
-       </div>
-    
+<footer>
+<p>&copy; 2023 Student Learning Portal</p>
+</footer>
+
 </body>
 </html>

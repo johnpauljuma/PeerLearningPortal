@@ -1,6 +1,6 @@
 <?php include 'admin_header.php'?>
 <?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,5 +58,7 @@
             <button type="submit" class="add-button">Add</button>
         </form>
     </div>
+
+    <?php include 'admin_footer.php'?>
 </body>
 </html>

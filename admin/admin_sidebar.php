@@ -211,14 +211,24 @@
     </div>
 
     <script>
-        function toggleDropdown(dropdown) {
-            const dropdownContent = dropdown.querySelector(".dropdown-content");
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
+    let activeDropdown = null; // Track the active dropdown
+
+    function toggleDropdown(dropdown) {
+        const dropdownContent = dropdown.querySelector(".dropdown-content");
+        
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            // If there's an active dropdown, hide it first
+            if (activeDropdown !== null) {
+                activeDropdown.querySelector(".dropdown-content").style.display = "none";
             }
+
+            // Show the clicked dropdown
+            dropdownContent.style.display = "block";
+            activeDropdown = dropdown; // Set the active dropdown
         }
+    }
 
     // Function to toggle the sidebar
     function toggleSidebar() {
@@ -227,12 +237,14 @@
 
         if (sidebar.style.display === "flex") {
             sidebar.style.display = "none";
-            
+            if (activeDropdown !== null) {
+                activeDropdown.querySelector(".dropdown-content").style.display = "none";
+            }
         } else {
             sidebar.style.display = "flex"; // Adjust this width as needed
-            
         }
     }
 </script>
+
 </body>
 </html>

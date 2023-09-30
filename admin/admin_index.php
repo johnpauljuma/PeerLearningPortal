@@ -1,6 +1,6 @@
 <?php include 'admin_header.php'?>
 <?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +23,6 @@
     </style>
 </head>
 <body>
-    
+<?php include 'admin_footer.php'?>
 </body>
 </html>

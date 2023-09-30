@@ -135,6 +135,8 @@
         window.location.href = "admin_login.php";
     }
 </script>
+
+<?php include 'admin_footer.php'?>
 </body>
 </html>
 

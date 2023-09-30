@@ -1,6 +1,6 @@
 <?php include 'admin_header.php'?>
 <?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+
 
 <!DOCTYPE html>
 <html>
@@ -126,5 +126,7 @@
         <input type="submit" value="Add">
     </form>
     </div>
+
+    <?php include 'admin_footer.php'?>
 </body>
 </html>

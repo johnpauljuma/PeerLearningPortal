@@ -1,6 +1,6 @@
 <?php include 'admin_header.php'?>
 <?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +13,7 @@
             height: fit-content;
             width: fit-content;
             margin: auto;
+            margin-bottom: 3em;
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 20px;
@@ -172,8 +173,121 @@
                 <td><a href="#">Edit</a></td>
                 <td><input type="submit" value="Delete"></td>
             </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>APT2030</td>
+                <td>Introduction To Programming</td>
+                <td>School of Science and Technology</td>
+                <td><a href="#">Edit</a></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
             
         </table>
     </div>
+    <?php include 'admin_footer.php'?>
 </body>
 </html>

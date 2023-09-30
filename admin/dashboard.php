@@ -157,6 +157,6 @@ ob_end_flush();*/
            
         </section>
     
-        
+    <?php include 'admin_footer.php'?>
 </body>
 </html>
