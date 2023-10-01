@@ -1,6 +1,26 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+<?php 
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+
+
+    // Database configuration
+    $host = "localhost";
+    $username = "root"; 
+    $password = ""; 
+    $database = "student";
+
+    // Create a database connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch data from the tutee_applications table
+    $sql = "SELECT * FROM tutee_applications";
+    $result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,45 +183,44 @@
                 <th>Full Name</th>
                 <th>Year of Study</th>
                 <th>Course</th>
-                <th>Edit</th>
                 <th>Drop</th>
-                <th>Select All<input type="checkbox" name="select_all"></th>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
+                <th>Select All<input type="checkbox" name="select_all" id="select_all"></th>
             </tr>
             
-        </table>
-    </div>
+            <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Student_ID"] . "</td>";
+                echo "<td>" . $row["Full_Name"] . "</td>";
+                echo "<td>" . $row["Year"] . "</td>";
+                echo "<td>" . $row["Course"] . "</td>";
+                echo "<td><a href='#'>Drop</a></td>";
+                echo "<td><input type='checkbox' name='select_row[]' class='row-checkbox' value='" . $row["Student_ID"] . "'></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
+    </table>
+
+    <!-- JavaScript to handle select all checkbox -->
+    <script>
+    const selectAllCheckbox = document.getElementById('select_all');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+    selectAllCheckbox.addEventListener('change', () => {
+        rowCheckboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
+</script>
+<?php include 'admin_footer.php'?>
 </body>
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>

@@ -1,11 +1,69 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
+<?php 
+include 'admin_header.php';
+include 'admin_sidebar.php';
+include 'footer.php';
 
+
+// Database configuration
+$host = "localhost";
+$username = "root"; 
+$password = ""; 
+$database = "student";
+
+// Create a database connection
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $student_id = $_POST["student_id"];
+    $name = $_POST["name"];
+    $course = $_POST["course"];
+    $major = $_POST["major"];
+    $year = $_POST["year"];
+    $semester_year = $_POST["semester_year"];
+    $concentration = $_POST["concentration"];
+    $role = $_POST["role"];
+
+     // Prepare and execute SQL query to insert data into the appropriate table
+     if ($role === "tutee") {
+        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+    } elseif ($role === "tutor") {
+        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+    } else {
+        // Handle the situation when the role is neither "tutee" nor "tutor"
+        echo "<h2>Error: Invalid Role.</h2>";
+        exit; // Exit the script
+    }
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>
+        alert('Student Added successfully!')
+        window.location.href = 'dashboard.php';
+        </script>";
+    } /*else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }*/
+else {
+    // If the form was not submitted via POST, handle the situation accordingly
+    echo "<h2>Error: Form was not submitted.</h2>";
+}
+}
+
+// Close the database connection
+$conn->close();
+
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tutor / Tutee Application</title>
+    <title>Tute/Tutor Application</title>
     <style>
     body{
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -76,10 +134,10 @@
 
 </head>
 <body>
-    <center><h1>Tutor / Tutee Application</h1></center>
+    <center><h1>Tute/Tutor Application</h1></center>
     <div class="container">
     
-    <form action="submit_application.php" method="post">
+    <form action="add_student.php" method="post">
         <!-- Student ID -->
         <label for="student_id">Student ID:</label>
         <input type="text" id="student_id" name="student_id" required>
@@ -119,14 +177,22 @@
 
         
         <label for="concentration">Concentration:</label>
-        <input type="text" id="concentration" name="concentration">
+        <input type="text" id="concentration" name="concentration" required>
+
+        
         <br><br>
 
+        <label for="role">User Role:</label>
+            <select id="role" name="role">
+                <option value="tutee">Tutee</option>
+                <option value="tutor">Tutor</option>
+            </select>
+
+            <br><br>
+
         <!-- Submit Button -->
-        <input type="submit" value="Add">
+        <input type="submit" value="ADD">
     </form>
     </div>
-
-    <?php include 'admin_footer.php'?>
 </body>
 </html>

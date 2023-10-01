@@ -1,5 +1,52 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
+<?php 
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+
+    //Database configuration
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "student";
+
+    //database connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve form data
+        $courseCode = $_POST['courseCode'];
+        $courseName = $_POST['courseName'];
+        $school = $_POST['school'];
+
+        // Use prepared statement to prevent SQL injection
+        $sql = "INSERT INTO courses (Course_code, Course_name, School) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("sss", $courseCode, $courseName, $school);
+            if ($stmt->execute()) {
+                echo "<script>
+                alert('Course added successfully!')
+                window.location.href = 'add_course.php';
+                </script>";
+            } else {
+                // Registration failed
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            // Prepare statement failed
+            echo "Error: " . $conn->error;
+        }
+    
+        // Close the database connection
+        $conn->close();
+    }
+    
+?>
 
 <!DOCTYPE html>
 <html>
@@ -46,7 +93,7 @@
 <body>
     <div class="form-container">
         <h2>Add Course</h2>
-        <form>
+        <form method="post" action="add_course.php">
             
             <input type="text" class="form-input" id="courseCode" name="courseCode" placeholder="Course Code" required>
 

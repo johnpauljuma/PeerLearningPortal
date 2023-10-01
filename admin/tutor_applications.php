@@ -1,6 +1,26 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
-<?php include 'admin_footer.php'?>
+<?php 
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+
+
+    // Database configuration
+    $host = "localhost";
+    $username = "root"; 
+    $password = ""; 
+    $database = "student";
+
+    // Create a database connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch data from the tutee_applications table
+    $sql = "SELECT * FROM tutor_applications";
+    $result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +79,25 @@
         .h3 {
             display: inline-flex;
             width: 50%;
+            
+        }
+        .match{
+            display: inline-flex;
+            padding: 2px 10px 0 10px;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 100%;
+            float: right;
+            font-weight: bold;
+            margin-left: 2em;
+            border-radius: 10px;
+            
+            
+        }
+        .match_student{
+            padding: 0 5px 0 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px 0;
         }
 
         .cover {
@@ -86,6 +125,7 @@
             height: 40px;
             display: flex;
             max-width: 300px;
+            
         }
 
         form.example input[type=text] {
@@ -125,10 +165,11 @@
 </head>
 <body>
     
-        <center><h2>Tutor Applications</h2></center>
+        <center><h2>Tutee Applications</h2></center>
     <div class="container">
         <div class="cover">
             <div class="h3"><h3>Student Details</h3></div>
+            <div class="match"><a href="#" class="match_student"><h3>Match Student(s)</h3></a></div>
             <div class="form_container">
                 <form class="example" action="/action_page.php">
                     <input type="text" placeholder="Search student..." name="search2">
@@ -142,44 +183,44 @@
                 <th>Full Name</th>
                 <th>Year of Study</th>
                 <th>Course</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>698560</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td>APT2030</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
+                <th>Drop</th>
+                <th>Select All<input type="checkbox" name="select_all" id="select_all"></th>
             </tr>
             
-        </table>
-    </div>
+            <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Student_ID"] . "</td>";
+                echo "<td>" . $row["Full_Name"] . "</td>";
+                echo "<td>" . $row["Year"] . "</td>";
+                echo "<td>" . $row["Course"] . "</td>";
+                echo "<td><a href='#'>Drop</a></td>";
+                echo "<td><input type='checkbox' name='select_row[]' class='row-checkbox' value='" . $row["Student_ID"] . "'></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
+    </table>
+
+    <!-- JavaScript to handle select all checkbox -->
+    <script>
+    const selectAllCheckbox = document.getElementById('select_all');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+    selectAllCheckbox.addEventListener('change', () => {
+        rowCheckboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
+</script>
+<?php include 'admin_footer.php'?>
 </body>
 </html>
+
+<?php
+// Close the database connection
+$conn->close();
+?>
