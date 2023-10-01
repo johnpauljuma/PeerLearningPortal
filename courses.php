@@ -1,8 +1,27 @@
 <?php 
-include './includes/header.php';
-include './includes/sidebar.php';
-include './includes/footer.php';
+    include './includes/header.php';
+    include './includes/sidebar.php';
+    include './includes/footer.php';
+
+    //Database configuration
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "student";
+
+    //database connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch data from the courses table
+    $sql = "SELECT * FROM courses";
+    $result = $conn->query($sql);
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,11 +62,19 @@ include './includes/footer.php';
             <th>Course Name</th>
             <th>School</th>
 
-            <tr>
-                <td>APT1030</td>
-                <td>Introduction to programming</td>
-                <td> School of Sience and Technology</td>
-            </tr>
+            <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Course_code"] . "</td>";
+                echo "<td>" . $row["Course_name"] . "</td>";
+                echo "<td>" . $row["School"] . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
         </table>
     </div>
 </body>

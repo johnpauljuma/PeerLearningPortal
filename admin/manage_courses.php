@@ -1,5 +1,25 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
+<?php
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+
+    //Database configuration
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "student";
+
+    //database connection
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch data from the courses table
+    $sql = "SELECT * FROM courses";
+    $result = $conn->query($sql);
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,146 +165,21 @@
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-            <tr>
-                <td>APT2030</td>
-                <td>Introduction To Programming</td>
-                <td>School of Science and Technology</td>
-                <td><a href="#">Edit</a></td>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
+            <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Course_code"] . "</td>";
+                echo "<td>" . $row["Course_name"] . "</td>";
+                echo "<td>" . $row["School"] . "</td>";
+                echo "<td><a href='#'>Edit</a></td>";
+                echo "<td><button>Delete</butoon></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
             
         </table>
     </div>

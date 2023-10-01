@@ -1,53 +1,51 @@
 <?php 
-include './includes/header.php';
-include './includes/sidebar.php';
+    include './includes/header.php';
+    include './includes/sidebar.php';
 
 
-$dbHost = "localhost";
-$dbUser = "username";
-$dbPassword = "";
-$dbName = "student";
+    $dbHost = "localhost";
+    $dbUser = "username";
+    $dbPassword = "";
+    $dbName = "student";
 
-$connection = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
+    $connection = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
 
-$user_id = intval($_SESSION['std_id']);
+    $user_id = intval($_SESSION['std_id']);
 
-$query = $connection->prepare("SELECT Student_ID, Full_Name, Email, User_Role FROM tblregistration WHERE Student_ID = ?");
-$query->bind_param("i", $user_id);
-$query->execute();
-$result = $query->get_result();
+    $query = $connection->prepare("SELECT Student_ID, Full_Name, Email FROM tblregistration WHERE Student_ID = ?");
+    $query->bind_param("i", $user_id);
+    $query->execute();
+    $result = $query->get_result();
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $std_id = $row['Student_ID'];
-    $full_name = $row['Full_Name'];
-    $email = $row['Email'];
-    $user_role = $row['User_Role'];
-    
-} else {
-    echo "Student not found.";
-}
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $std_id = $row['Student_ID'];
+        $full_name = $row['Full_Name'];
+        $email = $row['Email'];
+        
+    } else {
+        echo "Student not found.";
+    }
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle form submission
-    $new_std_id = $_POST['std_id'];
-    $new_full_name = $_POST['full_name'];
-    $new_email = $_POST['email'];
-    $new_user_role = $_POST['user_role'];
-    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Handle form submission
+        $new_std_id = $_POST['std_id'];
+        $new_full_name = $_POST['full_name'];
+        $new_email = $_POST['email'];
+        
 
-    // Create an UPDATE query to update the employee's information
-    $updateQuery = $connection->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=?, User_Role=? WHERE Student_ID = ?");
-    $updateQuery->bind_param("ssss", $new_std_id, $new_full_name, $new_email, $new_user_role);
+        // Create an UPDATE query to update the employee's information
+        $updateQuery = $connection->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
+        $updateQuery->bind_param("sss", $new_std_id, $new_full_name, $new_email);
 
-    if ($updateQuery->execute()) {
-        echo "<script>
+        if ($updateQuery->execute()) {
+            echo "<script>
         alert('Student Information Updated successfully!')
         window.location.href = 'profile.php';
         </script>";
@@ -58,17 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $std_id = $row['Student_ID'];
             $full_name = $row['Full_Name'];
             $email = $row['Email'];
-            $user_role = $row['User_Role'];
         }
-    } else {
-        // Update failed
-        echo "Error updating Student information: " . $connection->error;
+        } else {
+            // Update failed
+            echo "Error updating Student information: " . $connection->error;
+        }
     }
-}
 
 
-// Close the database connection
-$connection->close();
+    // Close the database connection
+    $connection->close();
 ?>
 
 <!DOCTYPE html>
@@ -80,24 +77,18 @@ $connection->close();
     
 
    <link rel="stylesheet"   type="text/css" href="mystyle.css">
-   <script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous">
-    
-   </script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+   <script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
 
-
-   
     <style>
-        
-        
         .container {
             display: flex;
             flex-direction: column;
             max-width: 600px;
             margin: 20px auto;
             padding: 40px;
-            background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 5px 0 ;
         }
@@ -160,8 +151,6 @@ $connection->close();
     </style>
 </head>
 <body>
-    
-
     <div class="container">
         <div class="parent-div">
             <i class="fa-solid fa-user"></i>
@@ -197,21 +186,6 @@ $connection->close();
             </div>
             </tr>
 
-            <tr>
-            <div class="input-row">
-                <td>
-                <div class="input-group">
-                <label for="user_role">User Role:</label>
-                <select id="user_role" name="user_role">
-                    <option value="<?php echo $user_role; ?>" placeholder="Tutee">Tutee</option>
-                    <option value="<?php echo $user_role; ?>" placeholder="Tutee">Tutor</option>
-                </select>
-                </div>
-                </td>
-        
-            </div>
-            </tr>
-
     <tr>
         <div class="input-row">
         <td>
@@ -223,12 +197,9 @@ $connection->close();
         </td>
     </div>
     </tr>
-    </div>
-
-        
-    
+   
     </table> 
     </form> 
-        </div>
+    </div>
 </body>
 </html>
