@@ -83,12 +83,6 @@ include './includes/footer.php';
             
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-            
-            <label for="user_role">User Role:</label>
-            <select id="user_role" name="user_role">
-                <option value="tutee">Tutee</option>
-                <option value="tutor">Tutor</option>
-            </select>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>

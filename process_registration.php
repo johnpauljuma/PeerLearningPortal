@@ -19,14 +19,13 @@ if (isset($_POST['register'])) {
     $std_id = $_POST['std_id'];
     $full_name = $_POST['full_name'];
     $email = $_POST['email'];
-    $user_role = $_POST['user_role'];
     $password = $_POST['password'];
 
     // Hash the password for security (you should use a stronger hashing method in production)
     //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Create an SQL insert query
-    $sql = "INSERT INTO tblregistration (Student_ID, Full_Name, Email, User_Role, Password) VALUES ('$std_id', '$full_name', '$email', '$user_role', '$password')";
+    $sql = "INSERT INTO tblregistration (Student_ID, Full_Name, Email, Password) VALUES ('$std_id', '$full_name', '$email', '$password')";
 
     // Perform the insert operation
     if (mysqli_query($conn, $sql)) {

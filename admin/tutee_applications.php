@@ -59,6 +59,25 @@
         .h3 {
             display: inline-flex;
             width: 50%;
+            
+        }
+        .match{
+            display: inline-flex;
+            padding: 2px 10px 0 10px;
+            justify-content: flex-end;
+            width: 100%;
+            max-width: 100%;
+            float: right;
+            font-weight: bold;
+            margin-left: 2em;
+            border-radius: 10px;
+            
+            
+        }
+        .match_student{
+            padding: 0 5px 0 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px 0;
         }
 
         .cover {
@@ -86,6 +105,7 @@
             height: 40px;
             display: flex;
             max-width: 300px;
+            
         }
 
         form.example input[type=text] {
@@ -129,6 +149,7 @@
     <div class="container">
         <div class="cover">
             <div class="h3"><h3>Student Details</h3></div>
+            <div class="match"><a href="#" class="match_student"><h3>Match Student(s)</h3></a></div>
             <div class="form_container">
                 <form class="example" action="/action_page.php">
                     <input type="text" placeholder="Search student..." name="search2">
@@ -143,7 +164,8 @@
                 <th>Year of Study</th>
                 <th>Course</th>
                 <th>Edit</th>
-                <th>Delete</th>
+                <th>Drop</th>
+                <th>Select All<input type="checkbox" name="select_all"></th>
             </tr>
             <tr>
                 <td>698560</td>

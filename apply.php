@@ -27,11 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $year = $_POST["year"];
     $semester_year = $_POST["semester_year"];
     $concentration = $_POST["concentration"];
+    $role = $_POST["role"];
 
-    // Prepare and execute SQL query to insert data into applications table
-    $sql = "INSERT INTO applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration)
-            VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration')";
-
+     // Prepare and execute SQL query to insert data into the appropriate table
+     if ($role === "tutee") {
+        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+    } elseif ($role === "tutor") {
+        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+    } else {
+        // Handle the situation when the role is neither "tutee" nor "tutor"
+        echo "<h2>Error: Invalid Role.</h2>";
+        exit; // Exit the script
+    }
     if ($conn->query($sql) === TRUE) {
         echo "<script>
         alert('Application Submitted successfully!')
@@ -168,8 +177,18 @@ $conn->close();
 
         
         <label for="concentration">Concentration:</label>
-        <input type="text" id="concentration" name="concentration">
+        <input type="text" id="concentration" name="concentration" required>
+
+        
         <br><br>
+
+        <label for="role">User Role:</label>
+            <select id="role" name="role">
+                <option value="tutee">Tutee</option>
+                <option value="tutor">Tutor</option>
+            </select>
+
+            <br><br>
 
         <!-- Submit Button -->
         <input type="submit" value="Submit">

@@ -125,7 +125,10 @@
         <div class="sidebar_child2"><a href="rating.php" class="sidebar-option">Ratings</a></div>
         </div>
 
-
+        <div class="sidebar_container">
+        <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:24px"></i></div>
+        <div class="sidebar_child2"><a href="groups.php" class="sidebar-option">Groups</a></div>
+        </div>
 
        
         <div class="sidebar_scontainer">
