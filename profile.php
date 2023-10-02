@@ -1,72 +1,72 @@
 <?php 
+    session_start();
+
     include './includes/header.php';
     include './includes/sidebar.php';
 
+    // Database configuration
+    $host = "localhost";
+    $username = "root"; 
+    $password = ""; 
+    $database = "student";
 
-    $dbHost = "localhost";
-    $dbUser = "username";
-    $dbPassword = "";
-    $dbName = "student";
-
-    $connection = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
+    // Create a database connection
+    $conn = new mysqli($host, $username, $password, $database);
 
     // Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    $user_id = intval($_SESSION['std_id']);
+    // Get the user's ID from the session
+    $user_id = intval($_SESSION['std_id']); // Use the student ID from the session
 
-    $query = $connection->prepare("SELECT Student_ID, Full_Name, Email FROM tblregistration WHERE Student_ID = ?");
-    $query->bind_param("i", $user_id);
+    // Prepare and execute a SELECT query to retrieve user data
+    $query = $conn->prepare("SELECT Student_ID, Full_Name, Email FROM tblregistration WHERE Student_ID = ?");
+    $query->bind_param("s", $user_id);
     $query->execute();
     $result = $query->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $std_id = $row['Student_ID'];
-        $full_name = $row['Full_Name'];
-        $email = $row['Email'];
-        
-    } else {
-        echo "Student not found.";
-    }
-
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Handle form submission
-        $new_std_id = $_POST['std_id'];
-        $new_full_name = $_POST['full_name'];
-        $new_email = $_POST['email'];
-        
-
-        // Create an UPDATE query to update the employee's information
-        $updateQuery = $connection->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
-        $updateQuery->bind_param("sss", $new_std_id, $new_full_name, $new_email);
-
-        if ($updateQuery->execute()) {
-            echo "<script>
-        alert('Student Information Updated successfully!')
-        window.location.href = 'profile.php';
-        </script>";
-        $query->execute();
-        $result = $query->get_result();
+    if ($result) {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $std_id = $row['Student_ID'];
             $full_name = $row['Full_Name'];
             $email = $row['Email'];
+        } else {
+            echo "Student not found.";
+
         }
+    } else {
+        echo "Error executing the SQL query: " . $conn->error;
+        
+    }
+    
+    // Handle form submission
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $new_std_id = $_POST['std_id'];
+        $new_full_name = $_POST['full_name'];
+        $new_email = $_POST['email'];
+
+        // Create an UPDATE query to update the user's information
+        $updateQuery = $conn->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
+        $updateQuery->bind_param("sssi", $new_std_id, $new_full_name, $new_email, $user_id);
+
+        if ($updateQuery->execute()) {
+            echo "<script>
+                alert('Student Information Updated successfully!')
+                window.location.href = 'profile.php';
+            </script>";
         } else {
             // Update failed
-            echo "Error updating Student information: " . $connection->error;
+            echo "Error updating Student information: " . $conn->error;
         }
     }
 
-
     // Close the database connection
-    $connection->close();
+    $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,6 +96,29 @@
             display: inline-block;
             margin: auto;
             font-size: 50px;
+            
+        }
+        .usr{
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+           
+        }
+        .usr_email{
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .usr_icon{
+            display: flex;
+            margin: 0;
+            padding: 10px;
+            left: 50%;
+            justify-content: center;
             
         }
 
@@ -132,7 +155,7 @@
             width: 200px;
         }
         .submit{
-            
+            float: right;
             width: fit-content;
         }
         button{ 
@@ -153,9 +176,9 @@
 <body>
     <div class="container">
         <div class="parent-div">
-            <i class="fa-solid fa-user"></i>
-            <?php echo "$full_name" ?>
-            <?php echo "$email" ?>
+            <div class="usr_icon"><center><i class="fa-solid fa-user"></center></i></div>
+           <div class="usr"><?php echo "$full_name" ?></div>
+            <div class="usr usr_email"><?php echo "$email" ?></div>
         </div>
 
         <div class="heading"><h2>Update Student Information</h2></div>
@@ -188,6 +211,20 @@
 
     <tr>
         <div class="input-row">
+        <td>
+            <div class="input-group">
+                <div class="submit">
+                    
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="input-group">
+                <div class="submit">
+                    
+                </div>
+            </div>
+        </td>
         <td>
             <div class="input-group">
                 <div class="submit">

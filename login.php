@@ -1,28 +1,30 @@
 <?php
-    //include './includes/header.php';
-    //include './includes/sidebar.php';
-    include './includes/footer.php';
+// ...
 
-    session_start();
-    $message="";
-    if(count($_POST)>0) {
-        $con = mysqli_connect('127.0.0.1:3306','root','','student') or die('Unable To connect');
-        $result = mysqli_query($con,"SELECT * FROM tblregistration WHERE Student_ID='" . $_POST["std_id"] . "' and password = '". $_POST["password"]."'");
-        $row  = mysqli_fetch_array($result);
-        
-        if(is_array($row)) {
-        
-            echo "<script>
-        alert('Login successful!')
-        window.location.href = 'index.php';
+session_start();
+$message = "";
+
+if (count($_POST) > 0) {
+    $con = mysqli_connect('127.0.0.1:3306', 'root', '', 'student') or die('Unable To connect');
+    $result = mysqli_query($con, "SELECT * FROM tblregistration WHERE Student_ID='" . $_POST["std_id"] . "' and password = '" . $_POST["password"] . "'");
+    $row  = mysqli_fetch_array($result);
+
+    if (is_array($row)) {
+        // Store the student ID in the session
+        $_SESSION['std_id'] = $row['Student_ID'];
+
+        echo "<script>
+            alert('Login successful!')
+            window.location.href = 'index.php';
         </script>";
-
-        } else {
-         $message = "Invalid Username or Password!";
-        }
+    } else {
+        $message = "Invalid Username or Password!";
     }
-    
+}
+
+// ...
 ?>
+
 <!-- The rest of your HTML remains unchanged -->
 
 
