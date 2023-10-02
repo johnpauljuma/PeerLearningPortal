@@ -19,7 +19,7 @@
     }
 
     // Get the user's ID from the session
-    $user_id = intval($_SESSION['std_id']); // Use the student ID from the session
+    $user_id = $_SESSION['std_id']; // Use the student ID from the session
 
     // Prepare and execute a SELECT query to retrieve user data
     $query = $conn->prepare("SELECT Student_ID, Full_Name, Email FROM tblregistration WHERE Student_ID = ?");
@@ -48,11 +48,24 @@
         $new_full_name = $_POST['full_name'];
         $new_email = $_POST['email'];
 
-        // Create an UPDATE query to update the user's information
+       // Check if the new student ID already exists in the database
+    /*$checkQuery = $conn->prepare("SELECT Student_ID FROM tblregistration WHERE Student_ID = ?");
+    $checkQuery->bind_param("s", $new_std_id);
+    $checkQuery->execute();
+    $checkResult = $checkQuery->get_result();*/
+
+    if ($checkResult->num_rows > 0) {
+       /* echo "<script>
+                alert('Error! Student ID Already exists!')
+                window.location.href = 'profile.php';
+            </script>";*/
+    } else {
+        // Proceed with the update if the student ID is not already in use
         $updateQuery = $conn->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
         $updateQuery->bind_param("sssi", $new_std_id, $new_full_name, $new_email, $user_id);
 
         if ($updateQuery->execute()) {
+            $_SESSION['std_id'] = $new_std_id;
             echo "<script>
                 alert('Student Information Updated successfully!')
                 window.location.href = 'profile.php';
@@ -62,6 +75,7 @@
             echo "Error updating Student information: " . $conn->error;
         }
     }
+  }
 
     // Close the database connection
     $conn->close();

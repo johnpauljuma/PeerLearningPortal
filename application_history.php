@@ -36,16 +36,18 @@ include './includes/footer.php';
     </style>
 </head>
 <body>
-    <center><h1>Courses Offered</h1></center>
+    <center><h1>My Applications</h1></center>
     <div class="table_container">
         <table>
             <th>Date</th>
-            <th>Course</th>
+            <th>Course Code</th>
+            <th>Course Name</th>
             <th>Status</th>
 
             <tr>
                 <td>09/12/2022</td>
-                <td>APT2030: Introduction to programming</td>
+                <td>APT2030</td>
+                <td>Introduction to programming</td>
                 <td> Matched</td>
             </tr>
         </table>

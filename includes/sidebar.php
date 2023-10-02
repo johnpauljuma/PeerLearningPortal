@@ -57,8 +57,7 @@
             margin: 0;
             margin-left: 10px;
             margin-top: 10px;
-            z-index: 1;
-            
+                       
             padding: 0;
         }
         .sidebar_child2{
@@ -67,7 +66,7 @@
             font-weight: 1000;
             margin-right: -10px;
             padding: 0;
-            z-index: 1;
+            
         }
         .dropdown {
             position: relative;
@@ -77,11 +76,12 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            color: blue;
+            background-color: white;
             height: fit-content;
             border-radius: 5px;
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            z-index: 2;
             padding: 5px;
         }
         .a {
@@ -133,7 +133,6 @@
         <div class="sidebar_child1"><i class="fa fa-newspaper-o" style="font-size:24px"></i></div>
         <div class="sidebar_child2"><a href="groups.php" class="sidebar-option">Groups</a></div>
         </div>
-
        
         <div class="sidebar_scontainer">
         <div class="sidebar_child1"><i class="fa fa-sign-out" style="font-size:24px"></i></div>

@@ -84,18 +84,21 @@ include './includes/footer.php';
             <input type="text" id="full_name" name="full_name" required>
             
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required onblur="validateEmail(this)">
+
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
             <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-            
+            <input type="password" id="confirm_password" name="confirm_password" required onblur="validatePassword(this)">
+
             <div><button type="submit" name="register">Register</button></div>
 
         </form>            
         <div style="float: right; margin: 10px">Already have an account?   <a href="login.php">Login</a></div>
     </div>
+
+   
 </body>
 </html>

@@ -22,6 +22,36 @@ if (isset($_POST['register'])) {
     $full_name = $_POST['full_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    
+    // Check if passwords match
+    if ($password !== $confirm_password) {
+        echo "<script>
+                alert('Passwords do match!')
+                window.location.href = 'registration.php';
+            </script>";
+        exit();
+    }
+
+    // Validate the email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format.";
+        exit();
+    }
+
+    // Check if the student ID already exists in the database
+    $checkQuery = "SELECT * FROM tblregistration WHERE Student_ID = '$std_id'";
+    $result = mysqli_query($conn, $checkQuery);
+
+    if (mysqli_num_rows($result) > 0) {
+        // Student ID already exists, return an error
+        echo "<script>
+                alert('Student ID already exists! Please check the student ID and try again...')
+                window.location.href = 'registration.php';
+            </script>";
+        exit();
+    }
 
     // Hash the password for security (you should use a stronger hashing method in production)
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);

@@ -55,6 +55,16 @@ else {
 }
 }
 
+    // Fetch course codes from the 'courses' table
+    $courseCodes = array();
+    $query = "SELECT course_code FROM courses";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $courseCodes[] = $row["course_code"];
+        }
+    }
+
 // Close the database connection
 $conn->close();
 
@@ -147,12 +157,15 @@ $conn->close();
         
         <br><br>
 
-        <label for="course">Course:</label>
-        <select id="course" name="course" required>
-            <option value="computer_science">Computer Science</option>
-            <option value="engineering">Engineering</option>
-            <option value="biology">Biology</option>
-        </select>
+        <label for="course">Course Code:</label>
+            <select id="course" name="course" required>
+                <?php
+                // Populate the dropdown with course codes from the 'courses' table
+                foreach ($courseCodes as $code) {
+                    echo "<option value='$code'>$code</option>";
+                }
+                ?>
+            </select>
 
         <label for="major">Major:</label>
         <input type="text" id="major" name="major" required>
