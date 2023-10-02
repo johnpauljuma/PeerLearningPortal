@@ -1,17 +1,20 @@
 <?php
-// ...
-
 session_start();
 $message = "";
 
 if (count($_POST) > 0) {
     $con = mysqli_connect('127.0.0.1:3306', 'root', '', 'student') or die('Unable To connect');
-    $result = mysqli_query($con, "SELECT * FROM tblregistration WHERE Student_ID='" . $_POST["std_id"] . "' and password = '" . $_POST["password"] . "'");
-    $row  = mysqli_fetch_array($result);
+    $std_id = $_POST["std_id"];
+    $password = $_POST["password"];
+    
+    // Retrieve the hashed password from the database based on the provided username or email
+    $result = mysqli_query($con, "SELECT Student_ID, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
+    $row = mysqli_fetch_assoc($result);
 
-    if (is_array($row)) {
+    if ($row && password_verify($password, $row['password'])) {
+        // Password verification is successful
         // Store the student ID in the session
-        $_SESSION['std_id'] = $row['Student_ID'];
+        $_SESSION['std_id'] = $std_id;
 
         echo "<script>
             alert('Login successful!')
@@ -21,6 +24,8 @@ if (count($_POST) > 0) {
         $message = "Invalid Username or Password!";
     }
 }
+
+
 
 // ...
 ?>

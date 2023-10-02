@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include './includes/header.php';
     include './includes/sidebar.php';
     include './includes/footer.php';
@@ -28,6 +29,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3dbba9b848.js" crossorigin="anonymous"></script>
     <title>Student | courses</title>
     <style>
         .table_container{

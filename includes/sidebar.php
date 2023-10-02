@@ -46,15 +46,18 @@
         }
         .sidebar_scontainer{
             display: flex;
+            margin-top: 3em;
             bottom: 10px;
-            position: fixed;
+            position: relative;
+            cursor: pointer;
+            
         }
         .sidebar_child1{
             display: inline-flex;
             margin: 0;
             margin-left: 10px;
             margin-top: 10px;
-            
+            z-index: 1;
             
             padding: 0;
         }
@@ -64,7 +67,7 @@
             font-weight: 1000;
             margin-right: -10px;
             padding: 0;
-            
+            z-index: 1;
         }
         .dropdown {
             position: relative;
@@ -87,6 +90,7 @@
         }
         a{
             text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
