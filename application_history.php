@@ -39,7 +39,7 @@ include './includes/footer.php';
     <center><h1>My Applications</h1></center>
     <div class="table_container">
         <table>
-            <th>Date</th>
+            <th>Application Date</th>
             <th>Course Code</th>
             <th>Course Name</th>
             <th>Status</th>

@@ -3,6 +3,18 @@ include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
 
+session_start();
+
+if (isset($_SESSION['std_id'])) {
+    // The student is logged in, and their ID is stored in the session
+    $loggedInStudentID = $_SESSION['std_id'];
+} else {
+
+    echo 'student ID does not exist!';
+    // The student is not logged in, or the session has expired
+    header("Location: login.php");
+    //exit;
+}
 
 // Database configuration
 $host = "localhost";
@@ -28,14 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $semester_year = $_POST["semester_year"];
     $concentration = $_POST["concentration"];
     $role = $_POST["role"];
+    $date = $_POST["application_date"];
 
+    
      // Prepare and execute SQL query to insert data into the appropriate table
      if ($role === "tutee") {
-        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
     } elseif ($role === "tutor") {
-        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
     } else {
         // Handle the situation when the role is neither "tutee" nor "tutor"
         echo "<h2>Error: Invalid Role.</h2>";
@@ -150,7 +164,7 @@ $conn->close();
     <form action="apply.php" method="post">
         <!-- Student ID -->
         <label for="student_id">Student ID:</label>
-        <input type="text" id="student_id" name="student_id" required>
+        <input type="text" id="student_id" name="student_id" value="<?php echo $loggedInStudentID; ?>" required >
 
         <label for="name">Full Name:</label>
         <input type="text" id="name" name="name" placeholder="first name & last name" required>
@@ -200,6 +214,11 @@ $conn->close();
                 <option value="tutee">Tutee</option>
                 <option value="tutor">Tutor</option>
             </select>
+
+                <!-- Current Date -->
+            <label for="application_date">Application Date:</label>
+            <input type="date" id="application_date" name="application_date" readonly value="<?php echo date('Y-m-d'); ?>" required>
+
 
             <br><br>
 

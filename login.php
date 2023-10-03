@@ -15,11 +15,12 @@ if (count($_POST) > 0) {
         // Password verification is successful
         // Store the student ID in the session
         $_SESSION['std_id'] = $row['Student_ID'];
-
         echo "<script>
             alert('Login successful!')
             window.location.href = 'index.php';
         </script>";
+        // After successful login
+        
     } else {
         $message = "Invalid Username or Password!";
     }
