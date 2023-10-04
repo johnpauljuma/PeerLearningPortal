@@ -15,6 +15,8 @@ if (count($_POST) > 0) {
         // Password verification is successful
         // Store the student ID in the session
         $_SESSION['std_id'] = $row['Student_ID'];
+        $_SESSION['full_name'] = $row['Full_Name'];
+        $_SESSION['email'] = $row['Email'];
         echo "<script>
             alert('Login successful!')
             window.location.href = 'index.php';

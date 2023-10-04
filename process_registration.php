@@ -62,7 +62,7 @@ if (isset($_POST['register'])) {
     // Perform the insert operation
     if (mysqli_query($conn, $sql)) {
         // Registration successful
-        $_SESSION['std_id'] = $std_id;
+        //$_SESSION['std_id'] = $std_id;
         echo "<script>
         alert('Registration successful!')
         window.location.href = 'login.php';

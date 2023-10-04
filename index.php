@@ -35,6 +35,7 @@ include './includes/footer.php';
 <body>
 
     <center><h1 style="box-shadow: 0 0 5px 0;">Welcome Home</h1></center>
+
     <div class="container">
         <div class="content"></div>
         <img src="./images/home3.png" alt="">

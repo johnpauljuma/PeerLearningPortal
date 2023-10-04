@@ -110,16 +110,16 @@ include './includes/footer.php';
         const labels = document.querySelectorAll('label');
 
         stars.forEach((star, index) => {
-            star.addEventListener('click', () => {
+            stars.addEventListener('click', () => {
                 // Uncheck all stars
                 stars.forEach((s, i) => {
-                    s.checked = false;
+                    s.checked = true;
                     labels[i].classList.remove('selected');
                 });
 
                 // Check stars up to the clicked one
                 for (let i = 0; i <= index; i++) {
-                    stars[i].checked = true;
+                    stars[i].checked = false;
                     labels[i].classList.add('selected');
                 }
             });

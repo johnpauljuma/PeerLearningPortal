@@ -5,16 +5,6 @@ include './includes/footer.php';
 
 session_start();
 
-if (isset($_SESSION['std_id'])) {
-    // The student is logged in, and their ID is stored in the session
-    $loggedInStudentID = $_SESSION['std_id'];
-} else {
-
-    echo 'student ID does not exist!';
-    // The student is not logged in, or the session has expired
-    header("Location: login.php");
-    //exit;
-}
 
 // Database configuration
 $host = "localhost";
@@ -29,6 +19,12 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Get the user's ID from the session
+$user_id = $_SESSION['std_id']; // Use the student ID from the session
+$full_name = $_SESSION['full_name'];
+$email = $_SESSION['email'];
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -78,6 +74,17 @@ else {
             $courseCodes[] = $row["course_code"];
         }
     }
+    // Initialize the $std_id variable from the session
+   /* $std_id = $_SESSION['std_id'];
+
+    // Check if the session variable is set and not empty
+    if (!empty($std_id)) {
+        $std_id = $std_id;
+    } else {
+        echo "Student ID not found in the session.";
+        exit();
+    }*/
+
 
 // Close the database connection
 $conn->close();
@@ -164,10 +171,10 @@ $conn->close();
     <form action="apply.php" method="post">
         <!-- Student ID -->
         <label for="student_id">Student ID:</label>
-        <input type="text" id="student_id" name="student_id" value="<?php echo $loggedInStudentID; ?>" required >
+        <input type="text" id="student_id" name="student_id" value="<?php echo $std_id; ?>" required >
 
         <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" placeholder="first name & last name" required>
+        <input type="text" id="name" name="name" placeholder="first name & last name" value="<?php echo $full_name; ?>"required>
         
         <br><br>
 
