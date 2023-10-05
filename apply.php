@@ -1,9 +1,10 @@
 <?php 
+session_start();
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
 
-session_start();
+
 
 
 // Database configuration
@@ -21,9 +22,9 @@ if ($conn->connect_error) {
 }
 
 // Get the user's ID from the session
-$user_id = $_SESSION['std_id']; // Use the student ID from the session
+/*$user_id = $_SESSION['std_id']; // Use the student ID from the session
 $full_name = $_SESSION['full_name'];
-$email = $_SESSION['email'];
+$email = $_SESSION['email'];*/
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,13 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         alert('Application Submitted successfully!')
         window.location.href = 'index.php';
         </script>";
-    } /*else {
+    } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
-    }*/
-else {
-    // If the form was not submitted via POST, handle the situation accordingly
-    echo "<h2>Error: Form was not submitted.</h2>";
-}
+    }
+
 }
 
     // Fetch course codes from the 'courses' table

@@ -3,34 +3,25 @@ ob_start();
 include 'admin_header.php';
 include 'admin_sidebar.php';
 
+    // Database configuration
+    $host = "localhost";
+    $username = "root"; 
+    $password = ""; 
+    $database = "student";
 
-// // Check if the user is not logged in, redirect to the login page
-//     if (!isset($_SESSION['id'])) {
-//         header("Location: adminlogin.php");
-//         exit;
-//     }
-    /*$con = mysqli_connect('localhost', 'username', 'password', 'files') or die('Unable To connect');
+    // Create a database connection
+    $conn = new mysqli($servername, $username, $password, $database);
 
-    // Fetch the count of registered employees
-    $queryEmployees = "SELECT COUNT(*) as employeeCount FROM tblemployees";
-    $resultEmployees = mysqli_query($con, $queryEmployees);
-    $rowEmployees = mysqli_fetch_assoc($resultEmployees);
-    $employeeCount = $rowEmployees['employeeCount'];
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-    // Fetch the count of listed departments
-    $queryDepartments = "SELECT COUNT(*) as departmentCount FROM tbldepartments";
-    $resultDepartments = mysqli_query($con, $queryDepartments);
-    $rowDepartments = mysqli_fetch_assoc($resultDepartments);
-    $departmentCount = $rowDepartments['departmentCount'];
-
-    // Fetch the count of listed leave types
-    $queryLeaveTypes = "SELECT COUNT(*) as leaveTypeCount FROM tblleavetype";
-    $resultLeaveTypes = mysqli_query($con, $queryLeaveTypes);
-    $rowLeaveTypes = mysqli_fetch_assoc($resultLeaveTypes);
-    $leaveTypeCount = $rowLeaveTypes['leaveTypeCount'];
-
-ob_end_flush();*/
+    // Fetch data from the tutee_applications table
+    $sql = "SELECT * FROM tutor_applications";
+    $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,10 +71,12 @@ ob_end_flush();*/
 
 
     .section2{
-        justify-content: space-between;
-        padding: 2px 10px 2px 10px;
+        justify-content: center;
+        padding: 0;
+        padding-bottom: 1em;
         border-radius: 10px;
         box-shadow: 0 0 5px 0;
+        
     }
 
     .h1_dashboard{
@@ -93,11 +86,56 @@ ob_end_flush();*/
     }
 
     table{
-        background-color: white;
-        padding: 20px;
-        margin-bottom: 50px;
         border-radius: 10px;
         box-shadow: 0 0 5px 0;
+        margin: auto;
+        padding: 10px;
+    }
+
+    th {
+        padding: 5px;
+        text-align: left;
+        box-shadow: 0 0 5px 0;
+    }
+
+    td {
+        border: 1px;
+        margin: 5px;
+        text-align: left;
+        padding: 10px;
+    }
+
+    span {
+        color: red;
+        margin-left: 0;
+        margin-right: 2em;
+    }
+
+    h3 {
+        margin: 0;
+        margin-top: 10px;
+        margin-bottom: -10px;
+    }
+
+    .h3 {
+        display: inline-flex;
+        width: 50%;
+        
+    }
+    .match{
+        display: flex;
+        padding: 2px 10px 0 10px;
+        justify-content: flex-end;
+        float: right;
+        border-radius: 10px;
+        
+    }
+    .match_student{
+        padding: 0 5px 2px 5px;
+        border-radius: 10px;
+        height: 40px;
+        box-shadow: 0 0 5px 0;
+       
     }
 
     </style>
@@ -121,42 +159,53 @@ ob_end_flush();*/
             </section>
         
     <section class="section2">         
-    <h1 class="h1_dashboard">Pending Students</h1><br>
-           
-        <table border="0" cellspacing="5", cellpadding="5", width="100%">
-           
+    <h1 class="h1_dashboard">Pending Students (Tutors)</h1><br>
+    <div class="match"><a href="#" class="match_student"><h3>Match Student(s)</h3></a></div>
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Year of Study</th>
+                <th>Course</th>
+                <th>Drop</th>
+                <th>Select All<input type="checkbox" name="select_all" id="select_all"></th>
+            </tr>
             
-            <tr class="bold">
-                <td>#</td>
-                <td>Employee Name</td>
-                <td>Leave Type</td>
-                <td>Posting Date</td>
-                <td>Status</td>
-                <td>Action</td>
-                
-            </tr>
-            <tr>
-                <td><b>1</b></td>
-                <td>Name</td>
-                <td>Casual Leave</td>
-                <td>Date</td>
-                <td>Not Approved</td>
-                <td><button style="background-color:#0539EA; color: white" >View</button></td>
-
-            </tr>
-            <tr>
-                <td><b>2</b></td>
-                <td>Name</td>
-                <td>Annual Leave</td>
-                <td>Date</td>
-                <td>Not Approved</td>
-                <td><button style="background-color:#0539EA; color: white">View</button></td>
-
-            </tr>
-            </table>
+            <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Student_ID"] . "</td>";
+                echo "<td>" . $row["Full_Name"] . "</td>";
+                echo "<td>" . $row["Year"] . "</td>";
+                echo "<td>" . $row["Course"] . "</td>";
+                echo "<td><a href='#'>Drop</a></td>";
+                echo "<td><input type='checkbox' name='select_row[]' class='row-checkbox' value='" . $row["Student_ID"] . "'></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
+    </table>
            
-        </section>
+</section>
     
-    <?php include 'admin_footer.php'?>
+    <!-- JavaScript to handle select all checkbox -->
+    <script>
+    const selectAllCheckbox = document.getElementById('select_all');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+    selectAllCheckbox.addEventListener('change', () => {
+        rowCheckboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    });
+</script>
+<?php
+// Close the database connection
+$conn->close();
+?>
+<?php include 'admin_footer.php'?>
 </body>
 </html>
