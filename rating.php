@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
@@ -41,8 +43,9 @@ include './includes/footer.php';
             align-items: center;
         }
 
-        input[type="radio"] {
+        input[type="checkbox"] {
             display: none;
+            
         }
 
         label {
@@ -53,12 +56,12 @@ include './includes/footer.php';
 
         label:before {
             content: '\2605'; /* Unicode character for a star */
-            color: #ddd;
+            color: grey;
         }
 
-        input[type="radio"]:checked + label:before {
+        input[type="checkbox"]:checked + label:before {
             content: '\2605';
-            color: #FFD700; /* Change the star color for selected radio buttons */
+            color: blue;
         }
 
         textarea {
@@ -94,11 +97,11 @@ include './includes/footer.php';
         <h1>Rate Your Experience</h1>
         <p>Please rate your experience on a scale of 1 to 5:</p>
         <div class="rating-stars">
-            <input type="radio" name="rating" id="star5" value="5"><label for="star5"></label>
-            <input type="radio" name="rating" id="star4" value="4"><label for="star4"></label>
-            <input type="radio" name="rating" id="star3" value="3"><label for="star3"></label>
-            <input type="radio" name="rating" id="star2" value="2"><label for="star2"></label>
-            <input type="radio" name="rating" id="star1" value="1"><label for="star1"></label>
+            <input type="checkbox" name="rating" id="star5" value="5"><label for="star5"></label>
+            <input type="checkbox" name="rating" id="star4" value="4"><label for="star4"></label>
+            <input type="checkbox" name="rating" id="star3" value="3"><label for="star3"></label>
+            <input type="checkbox" name="rating" id="star2" value="2"><label for="star2"></label>
+            <input type="checkbox" name="rating" id="star1" value="1"><label for="star1"></label>
         </div>
         <textarea placeholder="Optional comments (max 200 characters)"></textarea>
         <button id="submit-button">Submit</button>
@@ -106,24 +109,25 @@ include './includes/footer.php';
 
     <script>
         // JavaScript to handle star rating behavior
-        const stars = document.querySelectorAll('input[type="radio"]');
+        const stars = document.querySelectorAll('input[type="checkbox"]');
         const labels = document.querySelectorAll('label');
 
         stars.forEach((star, index) => {
-            stars.addEventListener('click', () => {
+            star.addEventListener('click', () => { // Change 'stars' to 'star' here
                 // Uncheck all stars
                 stars.forEach((s, i) => {
-                    s.checked = true;
+                    s.checked = false; // Change to 'false' to uncheck all stars
                     labels[i].classList.remove('selected');
                 });
 
                 // Check stars up to the clicked one
                 for (let i = 0; i <= index; i++) {
-                    stars[i].checked = false;
+                    stars[i].checked = true; // Change to 'true' to check stars
                     labels[i].classList.add('selected');
                 }
             });
         });
+
     </script>
 </body>
 </html>
