@@ -20,7 +20,7 @@ if (count($_POST) > 0) {
         echo "<script>
             alert('Login successful!')
             window.location.href = 'index.php';
-        </script>";
+        </script>" . $_SESSION['full_nane'];
         // After successful login
         
     } else {

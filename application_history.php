@@ -1,9 +1,36 @@
-<?php 
+<?php
+session_start();
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
-?>
 
+
+$studentID = $_SESSION['std_id']; 
+echo $studentID;
+
+// Database configuration
+$host = "localhost";
+$username = "root"; 
+$password = ""; 
+$database = "student";
+
+// Create a database connection
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch data from tutee_applications table
+$tuteeSQL = "SELECT * FROM tutee_applications WHERE Student_ID = $studentID";
+$tuteeResult = $conn->query($tuteeSQL);
+
+// Fetch data from tutor_applications table
+$tutorSQL = "SELECT * FROM tutor_applications WHERE Student_ID = $studentID";
+$tutorResult = $conn->query($tutorSQL);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +45,9 @@ include './includes/footer.php';
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 0 5px 0;
-
         }
         table{
             border-collapse: collapse;
-            
             padding: 10px;
         }
         th{
@@ -41,15 +66,30 @@ include './includes/footer.php';
         <table>
             <th>Application Date</th>
             <th>Course Code</th>
-            <th>Course Name</th>
+            <th>Role</th>
             <th>Status</th>
 
-            <tr>
-                <td>09/12/2022</td>
-                <td>APT2030</td>
-                <td>Introduction to programming</td>
-                <td> Matched</td>
-            </tr>
+            <?php
+            // Display tutee applications
+            while ($row = $tuteeResult->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Date"] . "</td>";
+                echo "<td>" . $row["Course"] . "</td>";
+                echo "<td>Tutee</td>";
+                echo "<td>Matched</td>";
+                echo "</tr>";
+            }
+
+            // Display tutor applications
+            while ($row = $tutorResult->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["Date"] . "</td>";
+                echo "<td>" . $row["Course"] . "</td>";
+                echo "<td>Tutor</td>";
+                echo "<td>Matched</td>";
+                echo "</tr>";
+            }
+            ?>
         </table>
     </div>
 </body>

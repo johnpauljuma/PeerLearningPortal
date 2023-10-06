@@ -5,7 +5,12 @@ include './includes/sidebar.php';
 include './includes/footer.php';
 
 
-
+$studentID = $_SESSION['std_id']; 
+$fullName = $_SESSION['full_name'];
+$email = $_SESSION['email'];
+echo $studentID;
+echo $fullName;
+echo $email;
 
 // Database configuration
 $host = "localhost";
@@ -55,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql) === TRUE) {
         echo "<script>
         alert('Application Submitted successfully!')
-        window.location.href = 'index.php';
+        window.location.href = 'application_history.php';
         </script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -169,7 +174,7 @@ $conn->close();
     <form action="apply.php" method="post">
         <!-- Student ID -->
         <label for="student_id">Student ID:</label>
-        <input type="text" id="student_id" name="student_id" value="<?php echo $std_id; ?>" required >
+        <input type="text" id="student_id" name="student_id" value="<?php echo $studentID; ?>" required readonly>
 
         <label for="name">Full Name:</label>
         <input type="text" id="name" name="name" placeholder="first name & last name" value="<?php echo $full_name; ?>"required>

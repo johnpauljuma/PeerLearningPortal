@@ -17,9 +17,32 @@ include 'admin_sidebar.php';
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Fetch data from the tutee_applications table
+   /* // Fetch data from the tutee_applications table
     $sql = "SELECT * FROM tutor_applications";
-    $result = $conn->query($sql);
+    $result = $conn->query($sql);*/
+
+
+    // Count the number of tutees from tutee_applications table
+    $sqlTutees = "SELECT COUNT(*) AS tutee_count FROM tutee_applications";
+    $resultTutees = $conn->query($sqlTutees);
+
+    if ($resultTutees) {
+        $tuteeData = $resultTutees->fetch_assoc();
+        $tuteeCount = $tuteeData['tutee_count'];
+    } else {
+        $tuteeCount = 0; // Set to 0 if there's an error or no tutees
+    }
+
+    // Count the number of tutors from tutor_applications table
+    $sqlTutors = "SELECT COUNT(*) AS tutor_count FROM tutor_applications";
+    $resultTutors = $conn->query($sqlTutors);
+
+    if ($resultTutors) {
+        $tutorData = $resultTutors->fetch_assoc();
+        $tutorCount = $tutorData['tutor_count'];
+    } else {
+        $tutorCount = 0; // Set to 0 if there's an error or no tutors
+    }
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +85,8 @@ include 'admin_sidebar.php';
 
     .card p {
         margin-top: 10px;
-        font-size: 1rem;
-        background-color: #0539EA;
+        font-size: 1.5rem;
+        
     }
     .bold{
         font-weight: bold;
@@ -144,17 +167,17 @@ include 'admin_sidebar.php';
         <section class="cards">
                 <div class="card">
                     <h2>Tutees</h2>
-                    <p><b><?php echo $employeeCount; ?></b></p>
+                    <p><b><?php echo $tuteeCount; ?></b></p>
                 </div>
                 
                 <div class="card">
                     <h2>Tutors</h2>
-                    <p><b><?php echo $departmentCount; ?></b></p>
+                    <p><b><?php echo $tutorCount; ?></b></p>
                 </div>
                 
                 <div class="card">
                     <h2>Groups</h2>
-                    <p><b><?php echo $leaveTypeCount; ?></b></p>
+                    <p><b><?php echo $groupCount; ?></b></p>
                 </div>
             </section>
         
