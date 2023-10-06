@@ -8,7 +8,7 @@ if (count($_POST) > 0) {
     $password = $_POST["password"];
     
     // Retrieve the hashed password from the database based on the provided username or email
-    $result = mysqli_query($con, "SELECT Student_ID, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
+    $result = mysqli_query($con, "SELECT Student_ID, Full_Name, Email, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
     $row = mysqli_fetch_assoc($result);
 
     if ($row && password_verify($password, $row['password'])) {
@@ -28,13 +28,7 @@ if (count($_POST) > 0) {
     }
 }
 
-
-
-// ...
 ?>
-
-<!-- The rest of your HTML remains unchanged -->
-
 
 <html>
 <head>  
@@ -118,6 +112,7 @@ if (count($_POST) > 0) {
         
     </style>
 </head>
+
 <body>
     
 <div class="container">

@@ -1,16 +1,12 @@
-<?php 
+<?php
 session_start();
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
 
-
 $studentID = $_SESSION['std_id']; 
 $fullName = $_SESSION['full_name'];
 $email = $_SESSION['email'];
-echo $studentID;
-echo $fullName;
-echo $email;
 
 // Database configuration
 $host = "localhost";
@@ -25,12 +21,6 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-// Get the user's ID from the session
-/*$user_id = $_SESSION['std_id']; // Use the student ID from the session
-$full_name = $_SESSION['full_name'];
-$email = $_SESSION['email'];*/
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -65,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
 }
 
     // Fetch course codes from the 'courses' table
@@ -77,20 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $courseCodes[] = $row["course_code"];
         }
     }
-    // Initialize the $std_id variable from the session
-   /* $std_id = $_SESSION['std_id'];
-
-    // Check if the session variable is set and not empty
-    if (!empty($std_id)) {
-        $std_id = $std_id;
-    } else {
-        echo "Student ID not found in the session.";
-        exit();
-    }*/
-
-
-// Close the database connection
-$conn->close();
+    
+    // Close the database connection
+    $conn->close();
 
 ?>
 
@@ -177,7 +155,7 @@ $conn->close();
         <input type="text" id="student_id" name="student_id" value="<?php echo $studentID; ?>" required readonly>
 
         <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" placeholder="first name & last name" value="<?php echo $full_name; ?>"required>
+        <input type="text" id="name" name="name" placeholder="first name & last name" value="<?php echo $fullName; ?>"required readonly>
         
         <br><br>
 
@@ -212,7 +190,6 @@ $conn->close();
             <option value="summer_2024">Summer 2024</option>
         </select>
 
-        
         <label for="concentration">Concentration:</label>
         <input type="text" id="concentration" name="concentration" required>
 
@@ -228,7 +205,6 @@ $conn->close();
                 <!-- Current Date -->
             <label for="application_date">Application Date:</label>
             <input type="date" id="application_date" name="application_date" readonly value="<?php echo date('Y-m-d'); ?>" required>
-
 
             <br><br>
 

@@ -21,7 +21,6 @@
     // Get the user's ID from the session
     $user_id = $_SESSION['std_id']; // Use the student ID from the session
 
-    echo "Session content is: ".$_SESSION['std_id'];
 
     // Prepare and execute a SELECT query to retrieve user data
     $query = $conn->prepare("SELECT Student_ID, Full_Name, Email FROM tblregistration WHERE Student_ID = ?");
