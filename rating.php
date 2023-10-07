@@ -1,10 +1,60 @@
 <?php 
-session_start();
+    session_start();
 
-include './includes/header.php';
-include './includes/sidebar.php';
-include './includes/footer.php';
+    include './includes/header.php';
+    include './includes/sidebar.php';
+    include './includes/footer.php';
+
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Check if the user is logged in (you may have your own authentication logic)
+        if(isset($_SESSION['std_id'])) {
+            // Get the submitted rating and comments
+            $rating = $_POST['rating'];
+            $comments = $_POST['comments'];
+
+            // Database configuration
+            $host = "localhost";
+            $username = "root"; 
+            $password = ""; 
+            $database = "student";
+
+            // database connection
+            $conn = new mysqli($host, $username, $password, $database);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // SQL query to insert the rating and comments
+            $stmt = $conn->prepare('INSERT INTO ratings (Rating, Comments) VALUES (?, ?)');
+            $stmt->bind_param('is', $rating, $comments);
+
+            if ($stmt->execute()) {
+                // upon successful submition of Ratings ...
+                echo "<script>
+                    alert('Ratings submitted successfully!')
+                    window.location.href = 'rating.php';
+                    </script>";
+            } else {
+                echo 'Error submitting rating: ' . $stmt->error;
+            }
+
+            $stmt->close();
+            $conn->close();
+        } else {
+            // User is not logged in, redirect to the login page
+            header('Location: login.php');
+        }
+    }
+   else {
+        // Redirect to the rating page if accessed directly
+        header('Location: rating.php');
+        
+    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,18 +147,22 @@ include './includes/footer.php';
         <h1>Rate Your Experience</h1>
         <p>Please rate your experience on a scale of 1 to 5:</p>
         <div class="rating-stars">
+        <form action="rating.php" method="post">
             <input type="checkbox" name="rating" id="star5" value="5"><label for="star5"></label>
             <input type="checkbox" name="rating" id="star4" value="4"><label for="star4"></label>
             <input type="checkbox" name="rating" id="star3" value="3"><label for="star3"></label>
             <input type="checkbox" name="rating" id="star2" value="2"><label for="star2"></label>
             <input type="checkbox" name="rating" id="star1" value="1"><label for="star1"></label>
         </div>
-        <textarea placeholder="Optional comments (max 200 characters)"></textarea>
+        <input type="hidden" name="rating" id="rating">
+
+        <textarea placeholder="Optional comments (max 200 characters)" name="comments"></textarea>
         <button id="submit-button">Submit</button>
+        </form>
     </div>
 
     <script>
-        // JavaScript to handle star rating behavior
+        // handle star rating behavior
         const stars = document.querySelectorAll('input[type="checkbox"]');
         const labels = document.querySelectorAll('label');
 
@@ -125,8 +179,12 @@ include './includes/footer.php';
                     stars[i].checked = true; // Change to 'true' to check stars
                     labels[i].classList.add('selected');
                 }
+
+                // Set the value of the hidden input field
+                document.getElementById('rating').value = index + 1;
             });
         });
+
 
     </script>
 </body>
