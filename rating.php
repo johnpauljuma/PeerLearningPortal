@@ -4,11 +4,12 @@
     include './includes/header.php';
     include './includes/sidebar.php';
     include './includes/footer.php';
-
+    $studentID = $_SESSION['std_id'];
+    //echo "The session ID is: ".$studentID;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if the user is logged in (you may have your own authentication logic)
-        if(isset($_SESSION['std_id'])) {
+        if(isset($studentID)) {
             // Get the submitted rating and comments
             $rating = $_POST['rating'];
             $comments = $_POST['comments'];
@@ -42,17 +43,19 @@
             }
 
             $stmt->close();
-            $conn->close();
-        } else {
+            
+        } 
+        /*else {
             // User is not logged in, redirect to the login page
             header('Location: login.php');
-        }
+        }*/
+        $conn->close();
     }
-   else {
+   /*else {
         // Redirect to the rating page if accessed directly
         header('Location: rating.php');
         
-    }
+    }*/
 ?>
 
 

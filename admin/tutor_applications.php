@@ -27,6 +27,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>Admin | manage courses</title>
     <style>
         .container {
@@ -171,7 +173,7 @@
             <div class="h3"><h3>Student Details</h3></div>
             <div class="match"><a href="#" class="match_student" onclick="matchStudents()"><h3>Match Student(s)</h3></a></div>
             <div class="form_container">
-                <form class="example" action="/action_page.php">
+                <form class="example" action="">
                     <input type="text" placeholder="Search student..." name="search2">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
@@ -275,6 +277,31 @@
             document.querySelector('.match_student h3').textContent = 'Close ';
         }
     }
+
+    $(document).ready(function() {
+    // Function to handle search by ID or Name
+    function search() {
+        const searchText = $('#searchText').val().toLowerCase();
+        const rows = $('table tbody tr');
+
+        rows.each(function() {
+            const idCell = $(this).find('td:first-child');
+            const nameCell = $(this).find('td:nth-child(2)');
+            const idText = idCell.text().toLowerCase();
+            const nameText = nameCell.text().toLowerCase();
+
+            if (idText.includes(searchText) || nameText.includes(searchText)) {
+                $(this).css('background-color', 'yellow'); // Highlight matching rows
+            } else {
+                $(this).css('background-color', ''); // Clear highlighting
+            }
+        });
+    }
+
+    // Event listener for search input
+    $('#searchText').on('input', search);
+});
+
 </script>
 <?php include 'admin_footer.php'?>
 </body>
