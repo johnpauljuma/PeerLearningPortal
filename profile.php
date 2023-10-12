@@ -3,9 +3,10 @@
 
     include './includes/header.php';
     include './includes/sidebar.php';
+    include './includes/configuration.php';
 
     // Database configuration
-    $host = "localhost";
+   /* $host = "localhost";
     $username = "root"; 
     $password = ""; 
     $database = "student";
@@ -16,7 +17,7 @@
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    }
+    }*/
 
     // Get the user's ID from the session
     $user_id = $_SESSION['std_id']; // Use the student ID from the session

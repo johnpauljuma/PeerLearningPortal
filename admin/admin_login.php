@@ -2,12 +2,13 @@
     include './includes/header.php';
     //include './includes/sidebar.php';
     include './includes/footer.php';
+    include '.configuration.php';
 
     session_start();
     $message="";
     if(count($_POST)>0) {
-        $con = mysqli_connect('127.0.0.1:3306','root','','student') or die('Unable To connect');
-        $result = mysqli_query($con,"SELECT * FROM admin WHERE user_name='" . $_POST["user_name"] . "' and password = '". $_POST["password"]."'");
+        
+        $result = mysqli_query($conn,"SELECT * FROM admin WHERE user_name='" . $_POST["user_name"] . "' and password = '". $_POST["password"]."'");
         $row  = mysqli_fetch_array($result);
         
         if(is_array($row)) {

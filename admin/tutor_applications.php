@@ -1,21 +1,7 @@
 <?php 
     include 'admin_header.php';
     include 'admin_sidebar.php';
-
-
-    // Database configuration
-    $host = "localhost";
-    $username = "root"; 
-    $password = ""; 
-    $database = "student";
-
-    // Create a database connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include 'configuration.php';
 
     // Fetch data from the tutee_applications table
     $sql = "SELECT * FROM tutor_applications";

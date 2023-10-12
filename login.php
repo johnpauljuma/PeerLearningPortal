@@ -1,32 +1,33 @@
 <?php
-session_start();
-$message = "";
+    include './includes/configuration.php';
+    session_start();
+    $message = "";
 
-if (count($_POST) > 0) {
-    $con = mysqli_connect('127.0.0.1:3306', 'root', '', 'student') or die('Unable To connect');
-    $std_id = $_POST["std_id"];
-    $password = $_POST["password"];
-    
-    // Retrieve the hashed password from the database based on the provided username or email
-    $result = mysqli_query($con, "SELECT Student_ID, Full_Name, Email, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
-    $row = mysqli_fetch_assoc($result);
-
-    if ($row && password_verify($password, $row['password'])) {
-        // Password verification is successful
-        // Store the student ID in the session
-        $_SESSION['std_id'] = $row['Student_ID'];
-        $_SESSION['full_name'] = $row['Full_Name'];
-        $_SESSION['email'] = $row['Email'];
-        echo "<script>
-            alert('Login successful!')
-            window.location.href = 'index.php';
-        </script>" . $_SESSION['full_nane'];
-        // After successful login
+    if (count($_POST) > 0) {
         
-    } else {
-        $message = "Invalid Username or Password!";
+        $std_id = $_POST["std_id"];
+        $password = $_POST["password"];
+        
+        // Retrieve the hashed password from the database based on the provided username or email
+        $result = mysqli_query($con, "SELECT Student_ID, Full_Name, Email, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
+        $row = mysqli_fetch_assoc($result);
+
+        if ($row && password_verify($password, $row['password'])) {
+            // Password verification is successful
+            // Store the student ID in the session
+            $_SESSION['std_id'] = $row['Student_ID'];
+            $_SESSION['full_name'] = $row['Full_Name'];
+            $_SESSION['email'] = $row['Email'];
+            echo "<script>
+                alert('Login successful!')
+                window.location.href = 'index.php';
+            </script>" . $_SESSION['full_nane'];
+            // After successful login
+            
+        } else {
+            $message = "Invalid Username or Password!";
+        }
     }
-}
 
 ?>
 

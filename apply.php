@@ -2,25 +2,12 @@
 session_start();
 include './includes/header.php';
 include './includes/sidebar.php';
-include './includes/footer.php';
+include './includes/configuration.php';
 
 $studentID = $_SESSION['std_id']; 
 $fullName = $_SESSION['full_name'];
 $email = $_SESSION['email'];
 
-// Database configuration
-$host = "localhost";
-$username = "root"; 
-$password = ""; 
-$database = "student";
-
-// Create a database connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data

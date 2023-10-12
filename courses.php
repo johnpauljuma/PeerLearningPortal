@@ -3,19 +3,7 @@
     include './includes/header.php';
     include './includes/sidebar.php';
     include './includes/footer.php';
-
-    //Database configuration
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "student";
-
-    //database connection
-    $conn = new mysqli($servername, $username, $password, $database);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include './includes/configuration.php';
 
     // Fetch data from the courses table
     $sql = "SELECT * FROM courses";

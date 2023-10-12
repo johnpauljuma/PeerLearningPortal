@@ -2,25 +2,12 @@
 session_start();
 include './includes/header.php';
 include './includes/sidebar.php';
-include './includes/footer.php';
+include './includes/configuration.php';
 
 
 $studentID = $_SESSION['std_id']; 
 echo $studentID;
 
-// Database configuration
-$host = "localhost";
-$username = "root"; 
-$password = ""; 
-$database = "student";
-
-// Create a database connection
-$conn = new mysqli($host, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Fetch data from tutee_applications table
 $tuteeSQL = "SELECT * FROM tutee_applications WHERE Student_ID = $studentID";

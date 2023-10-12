@@ -1,22 +1,8 @@
 <?php 
 include 'admin_header.php';
 include 'admin_sidebar.php';
-include 'footer.php';
+include 'configuration.php';
 
-
-// Database configuration
-$host = "localhost";
-$username = "root"; 
-$password = ""; 
-$database = "student";
-
-// Create a database connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data

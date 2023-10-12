@@ -1,5 +1,8 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
+<?php
+     include 'admin_header.php';
+    include 'admin_sidebar.php';
+    include 'configuration.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">

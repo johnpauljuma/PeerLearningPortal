@@ -4,6 +4,8 @@
     include './includes/header.php';
     include './includes/sidebar.php';
     include './includes/footer.php';
+    include './includes/configuration.php';
+    
     $studentID = $_SESSION['std_id'];
     //echo "The session ID is: ".$studentID;
 
@@ -14,19 +16,6 @@
             $rating = $_POST['rating'];
             $comments = $_POST['comments'];
 
-            // Database configuration
-            $host = "localhost";
-            $username = "root"; 
-            $password = ""; 
-            $database = "student";
-
-            // database connection
-            $conn = new mysqli($host, $username, $password, $database);
-
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
 
             // SQL query to insert the rating and comments
             $stmt = $conn->prepare('INSERT INTO ratings (Rating, Comments) VALUES (?, ?)');
