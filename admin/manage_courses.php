@@ -160,7 +160,7 @@
                 echo "<td>" . $row["Course_code"] . "</td>";
                 echo "<td>" . $row["Course_name"] . "</td>";
                 echo "<td>" . $row["School"] . "</td>";
-                echo "<td><a href='#'>Edit</a></td>";
+                echo "<td><a href='edit_course.php?course_code=" . $row["Course_code"] . "&course_name=" . $row["Course_name"] . "&school=" . $row["School"] . "'>Edit</a></td>";
                 echo "<td><button>Delete</butoon></td>";
                 echo "</tr>";
             }
