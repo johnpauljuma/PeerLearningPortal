@@ -1,48 +1,51 @@
 <?php 
-include 'admin_header.php';
-include 'admin_sidebar.php';
-include 'configuration.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+    include 'configuration.php';
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $student_id = $_POST["student_id"];
-    $name = $_POST["name"];
-    $course = $_POST["course"];
-    $major = $_POST["major"];
-    $year = $_POST["year"];
-    $semester_year = $_POST["semester_year"];
-    $concentration = $_POST["concentration"];
-    $role = $_POST["role"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve form data
+        $student_id = $_POST["student_id"];
+        $name = $_POST["name"];
+        $course = $_POST["course"];
+        $major = $_POST["major"];
+        $year = $_POST["year"];
+        $semester_year = $_POST["semester_year"];
+        $concentration = $_POST["concentration"];
+        $role = $_POST["role"];
 
-     // Prepare and execute SQL query to insert data into the appropriate table
-     if ($role === "tutee") {
-        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
-    } elseif ($role === "tutor") {
-        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
-    } else {
-        // Handle the situation when the role is neither "tutee" nor "tutor"
-        echo "<h2>Error: Invalid Role.</h2>";
-        exit; // Exit the script
+        // Prepare and execute SQL query to insert data into the appropriate table
+        if ($role === "tutee") {
+            $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+        } elseif ($role === "tutor") {
+            $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
+                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
+        } else {
+            // Handle the situation when the role is neither "tutee" nor "tutor"
+            echo "<h2>Error: Invalid Role.</h2>";
+            exit; // Exit the script
+        }
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>
+            alert('Student Added successfully!')
+            window.location.href = 'dashboard.php';
+            </script>";
+        } /*else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }*/
+    else {
+        // If the form was not submitted via POST, handle the situation accordingly
+        echo "<h2>Error: Form was not submitted.</h2>";
     }
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>
-        alert('Student Added successfully!')
-        window.location.href = 'dashboard.php';
-        </script>";
-    } /*else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }*/
-else {
-    // If the form was not submitted via POST, handle the situation accordingly
-    echo "<h2>Error: Form was not submitted.</h2>";
-}
-}
+    }
 
-// Close the database connection
-$conn->close();
+    // Close the database connection
+    $conn->close();
 
 ?>
 

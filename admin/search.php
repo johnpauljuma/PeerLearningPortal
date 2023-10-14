@@ -1,29 +1,32 @@
 <?php
-include 'admin_header.php';
-include 'admin_sidebar.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+        
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
 
-// Database configuration
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "student";
+    // Database configuration
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "student";
 
-// Create a database connection
-$conn = new mysqli($host, $username, $password, $database);
+    // Create a database connection
+    $conn = new mysqli($host, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-// Initialize search query
-$search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
+    // Initialize search query
+    $search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
 
-// Construct SQL query to search for students
-$sql = "SELECT * FROM tutor_applications 
-        WHERE Student_ID LIKE '%$search_query%' OR Full_Name LIKE '%$search_query%'";
+    // Construct SQL query to search for students
+    $sql = "SELECT * FROM tutor_applications 
+            WHERE Student_ID LIKE '%$search_query%' OR Full_Name LIKE '%$search_query%'";
 
-$result = $conn->query($sql);
+    $result = $conn->query($sql);
 ?>
 
 <!-- Display search results -->

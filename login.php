@@ -1,4 +1,7 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    
     include './includes/configuration.php';
     session_start();
     $message = "";
@@ -9,12 +12,13 @@
         $password = $_POST["password"];
         
         // Retrieve the hashed password from the database based on the provided username or email
-        $result = mysqli_query($con, "SELECT Student_ID, Full_Name, Email, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
+        $result = mysqli_query($conn, "SELECT Student_ID, Full_Name, Email, password FROM tblregistration WHERE Student_ID='" . $std_id . "'");
         $row = mysqli_fetch_assoc($result);
 
         if ($row && password_verify($password, $row['password'])) {
-            // Password verification is successful
+            // If Password verification is successful
             // Store the student ID in the session
+            $_SESSION['id'] = $row['id'];
             $_SESSION['std_id'] = $row['Student_ID'];
             $_SESSION['full_name'] = $row['Full_Name'];
             $_SESSION['email'] = $row['Email'];
@@ -136,5 +140,3 @@
 
 </body>
 </html>
-
-

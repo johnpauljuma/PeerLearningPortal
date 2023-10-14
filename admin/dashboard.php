@@ -1,8 +1,12 @@
 <?php 
-ob_start();
-include 'admin_header.php';
-include 'admin_sidebar.php';
-include 'configuration.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+
+    ob_start();
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+    include 'configuration.php';
     
 
    /* // Fetch data from the tutee_applications table

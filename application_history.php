@@ -1,21 +1,23 @@
 <?php
-session_start();
-include './includes/header.php';
-include './includes/sidebar.php';
-include './includes/configuration.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    session_start();
+    include './includes/header.php';
+    include './includes/sidebar.php';
+    include './includes/configuration.php';
 
 
-$studentID = $_SESSION['std_id']; 
-echo $studentID;
+    $studentID = $_SESSION['std_id']; 
+    echo $studentID;
 
 
-// Fetch data from tutee_applications table
-$tuteeSQL = "SELECT * FROM tutee_applications WHERE Student_ID = $studentID";
-$tuteeResult = $conn->query($tuteeSQL);
+    // Fetch data from tutee_applications table
+    $tuteeSQL = "SELECT * FROM tutee_applications WHERE Student_ID = $studentID";
+    $tuteeResult = $conn->query($tuteeSQL);
 
-// Fetch data from tutor_applications table
-$tutorSQL = "SELECT * FROM tutor_applications WHERE Student_ID = $studentID";
-$tutorResult = $conn->query($tutorSQL);
+    // Fetch data from tutor_applications table
+    $tutorSQL = "SELECT * FROM tutor_applications WHERE Student_ID = $studentID";
+    $tutorResult = $conn->query($tutorSQL);
 
 ?>
 <!DOCTYPE html>

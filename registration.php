@@ -5,6 +5,7 @@ session_start();
 //include './includes/sidebar.php';
 include './includes/footer.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@ include './includes/footer.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peer Learning Portal Registration</title>
     <style>
-        /* Add your CSS styles here for layout and design */
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -73,6 +74,7 @@ include './includes/footer.php';
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Peer Learning Portal Registration</h2>

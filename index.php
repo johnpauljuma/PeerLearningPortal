@@ -2,6 +2,10 @@
 include './includes/header.php';
 include './includes/sidebar.php';
 include './includes/footer.php';
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

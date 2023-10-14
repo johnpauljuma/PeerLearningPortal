@@ -7,7 +7,7 @@
     $course_code = $_GET['course_code'];
     $course_name = $_GET['course_name'];
     $school = $_GET['school'];
-    
+    $id = $_GET['id'];
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
@@ -15,23 +15,25 @@
         $courseName = $_POST['courseName'];
         $school = $_POST['school'];
     
-        // Use prepared statement to prevent SQL injection
+        // SQL prepared statement => update the course details
         $sql = "UPDATE courses SET Course_code = ?, Course_name = ?, School = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
     
         if ($stmt) {
-            $stmt->bind_param("sssi", $course_code, $course_name, $school);
+            $stmt->bind_param("sssi", $courseCode, $courseName, $school, $id);
             if ($stmt->execute()) {
                 echo "<script>
                 alert('Course updated successfully!')
                 window.location.href = 'add_course.php';
                 </script>";
-            } else {
+            } 
+            else {
                 // Update failed
                 echo "Error: " . $stmt->error;
             }
             $stmt->close();
-        } else {
+        } 
+        else {
             // Prepare statement failed
             echo "Error: " . $conn->error;
         }
@@ -39,8 +41,6 @@
         // Close the database connection
         $conn->close();
     }
-    
-    
 ?>
 
 <!DOCTYPE html>

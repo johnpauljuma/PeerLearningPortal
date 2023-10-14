@@ -1,5 +1,10 @@
-<?php include 'admin_header.php'?>
-<?php include 'admin_sidebar.php'?>
+<?php 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);    
+
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">

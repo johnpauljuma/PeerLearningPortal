@@ -1,8 +1,11 @@
 <?php
-    include './includes/header.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    
+    include 'admin_header.php';
     //include './includes/sidebar.php';
-    include './includes/footer.php';
-    include '.configuration.php';
+    include 'admin_footer.php';
+    include 'configuration.php';
 
     session_start();
     $message="";

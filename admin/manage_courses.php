@@ -147,6 +147,7 @@
         </div>
         <table>
             <tr>
+                <th>#No</th>
                 <th>Course Code</th>
                 <th>Course Name</th>
                 <th>School</th>
@@ -157,10 +158,11 @@
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
+                echo "<td>" . $row["id"] . "</td>";
                 echo "<td>" . $row["Course_code"] . "</td>";
                 echo "<td>" . $row["Course_name"] . "</td>";
                 echo "<td>" . $row["School"] . "</td>";
-                echo "<td><a href='edit_course.php?course_code=" . $row["Course_code"] . "&course_name=" . $row["Course_name"] . "&school=" . $row["School"] . "'>Edit</a></td>";
+                echo "<td><a href='edit_course.php?id =" . $row["id"] . "&course_code=" . $row["Course_code"] . "&course_name=" . $row["Course_name"] . "&school=" . $row["School"] . "'>Edit</a></td>";
                 echo "<td><button>Delete</butoon></td>";
                 echo "</tr>";
             }

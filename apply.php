@@ -1,61 +1,63 @@
 <?php
-session_start();
-include './includes/header.php';
-include './includes/sidebar.php';
-include './includes/configuration.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    session_start();
+    include './includes/header.php';
+    include './includes/sidebar.php';
+    include './includes/configuration.php';
 
-$studentID = $_SESSION['std_id']; 
-$fullName = $_SESSION['full_name'];
-$email = $_SESSION['email'];
+    $studentID = $_SESSION['std_id']; 
+    $fullName = $_SESSION['full_name'];
+    $email = $_SESSION['email'];
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $student_id = $_POST["student_id"];
-    $name = $_POST["name"];
-    $course = $_POST["course"];
-    $major = $_POST["major"];
-    $year = $_POST["year"];
-    $semester_year = $_POST["semester_year"];
-    $concentration = $_POST["concentration"];
-    $role = $_POST["role"];
-    $date = $_POST["application_date"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve form data
+        $student_id = $_POST["student_id"];
+        $name = $_POST["name"];
+        $course = $_POST["course"];
+        $major = $_POST["major"];
+        $year = $_POST["year"];
+        $semester_year = $_POST["semester_year"];
+        $concentration = $_POST["concentration"];
+        $role = $_POST["role"];
+        $date = $_POST["application_date"];
 
-    
-     // Prepare and execute SQL query to insert data into the appropriate table
-     if ($role === "tutee") {
-        $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
-    } elseif ($role === "tutor") {
-        $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
-                VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
-    } else {
-        // Handle the situation when the role is neither "tutee" nor "tutor"
-        echo "<h2>Error: Invalid Role.</h2>";
-        exit; // Exit the script
-    }
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>
-        alert('Application Submitted successfully!')
-        window.location.href = 'application_history.php';
-        </script>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-
-    // Fetch course codes from the 'courses' table
-    $courseCodes = array();
-    $query = "SELECT course_code FROM courses";
-    $result = $conn->query($query);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $courseCodes[] = $row["course_code"];
+        
+        // Prepare and execute SQL query to insert data into the appropriate table
+        if ($role === "tutee") {
+            $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
+        } elseif ($role === "tutor") {
+            $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
+        } else {
+            // Handle the situation when the role is neither "tutee" nor "tutor"
+            echo "<h2>Error: Invalid Role.</h2>";
+            exit; // Exit the script
+        }
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>
+            alert('Application Submitted successfully!')
+            window.location.href = 'application_history.php';
+            </script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
-    
-    // Close the database connection
-    $conn->close();
+
+        // Fetch course codes from the 'courses' table
+        $courseCodes = array();
+        $query = "SELECT course_code FROM courses";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $courseCodes[] = $row["course_code"];
+            }
+        }
+        
+        // Close the database connection
+        $conn->close();
 
 ?>
 
