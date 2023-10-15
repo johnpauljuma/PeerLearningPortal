@@ -24,7 +24,7 @@
             if ($stmt->execute()) {
                 echo "<script>
                 alert('Course updated successfully!')
-                window.location.href = 'add_course.php';
+                window.location.href = 'manage_courses.php';
                 </script>";
             } 
             else {

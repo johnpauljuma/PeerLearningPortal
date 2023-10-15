@@ -21,7 +21,7 @@
             background-color: darkblue;
             color: white;
             overflow-y: scroll;
-            
+            font-weight: bold;
         }
 
         /* Sidebar Option Styles */
@@ -31,6 +31,14 @@
             text-decoration: none;
             display: block;
             color: white;
+            font-weight: bold;
+        }
+
+        .sidebar-option:hover{
+            background-color: blue;
+            border-radius: 5px;
+            color: white;
+            
         }
 
         /* Highlighted Option Style */
@@ -62,7 +70,6 @@
             position: absolute;
             background-color: white;
             color: white;
-            
             height: fit-content;
             border-radius: 10px;
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
@@ -76,6 +83,16 @@
         .a {
             text-decoration: none;
             margin-bottom: 20px;
+        }
+
+        .a:hover{
+            background-color: blue;
+            border-radius: 5px;
+            color: white;
+            padding: 5px;
+        }
+        div div div a:hover{
+            color: white;
         }
         a {
             text-decoration: none;

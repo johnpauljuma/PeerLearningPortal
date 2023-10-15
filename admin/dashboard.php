@@ -1,6 +1,6 @@
 <?php 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    /*error_reporting(E_ALL);
+    ini_set('display_errors', 1);*/
 
 
     ob_start();
@@ -169,7 +169,7 @@
                 
                 <div class="card">
                     <h2>Groups</h2>
-                    <p><b><?php echo $groupCount; ?></b></p>
+                    <p><b><?php /*echo $groupCount; */?></b></p>
                 </div>
             </section>
         
@@ -187,7 +187,7 @@
             </tr>
             
             <?php
-        if ($result->num_rows > 0) {
+        /*if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["Student_ID"] . "</td>";
@@ -200,7 +200,7 @@
             }
         } else {
             echo "<tr><td colspan='6'>No data available</td></tr>";
-        }
+        }*/
         ?>
     </table>
            

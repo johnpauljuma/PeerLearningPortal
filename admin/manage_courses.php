@@ -120,9 +120,25 @@
             border-radius: 0 20px 20px 0;
             cursor: pointer;
         }
+        td a:hover{
+            background-color: blue;
+            border-radius: 5px;
+            color: white;
+            padding: 2px;
+        }
+        td button{
+            font-size: 16px;
+            font-family: tahoma;
+            border: 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 0 0 blue;
+        }
 
-        form.example button:hover {
-            background: #0b7dda;
+        button:hover {
+            background: red;
+            cursor: pointer;
+            
         }
 
         form.example::after {
@@ -162,8 +178,8 @@
                 echo "<td>" . $row["Course_code"] . "</td>";
                 echo "<td>" . $row["Course_name"] . "</td>";
                 echo "<td>" . $row["School"] . "</td>";
-                echo "<td><a href='edit_course.php?id =" . $row["id"] . "&course_code=" . $row["Course_code"] . "&course_name=" . $row["Course_name"] . "&school=" . $row["School"] . "'>Edit</a></td>";
-                echo "<td><button>Delete</butoon></td>";
+                echo "<td><a href='edit_course.php?id=" . $row["id"] . "&course_code=" . $row["Course_code"] . "&course_name=" . $row["Course_name"] . "&school=" . $row["School"] . "'>Edit</a></td>";
+                echo "<td><button onclick='deleteCourse(" . $row["id"] . ")'>Delete</button></td>";
                 echo "</tr>";
             }
         } else {
@@ -173,6 +189,14 @@
             
         </table>
     </div>
+    <script>
+    function deleteCourse(id) {
+        if (confirm('Are you sure you want to delete this course?')) {
+            window.location.href = 'delete_course.php?id=' + id;
+        }
+    }
+    </script>
+
     <?php include 'admin_footer.php'?>
 </body>
 </html>
