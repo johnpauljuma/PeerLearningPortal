@@ -35,9 +35,11 @@
         }
 
         .sidebar-option:hover{
-            background-color: blue;
+            background-color: white;
             border-radius: 5px;
-            color: white;
+            color: blue;
+            margin-left: 2px;
+            padding: 15px 10px 15px 10px;
             
         }
 
@@ -184,7 +186,7 @@
         <div>
         <div class="sidebar_container">
         <div class="sidebar_child1"><i class="fa fa-home" style="font-size:24px"></i></div>
-        <div class="sidebar_child2"><a href="dashboard.php" class="sidebar-option">Home</a></div>
+        <div class="sidebar_child2"><a href="admin_index.php" class="sidebar-option">Home</a></div>
         </div>
 
         <div class="sidebar_container">

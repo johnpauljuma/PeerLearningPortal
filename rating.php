@@ -10,7 +10,7 @@
     include './includes/configuration.php';
     
     $studentID = $_SESSION['std_id'];
-    //echo "The session ID is: ".$studentID;
+    echo "The session ID is: ".$studentID;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if the user is logged in (you may have your own authentication logic)

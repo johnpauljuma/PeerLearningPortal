@@ -30,6 +30,13 @@
             display: block;
             color: white;
         }
+        .sidebar-option:hover{
+            background-color: white;
+            color: blue;
+            border-radius: 5px;
+            margin-left: 5px;
+            padding: 15px 5px 15px 5px;
+        }
 
         /* Highlighted Option Style */
         .active {
@@ -57,7 +64,6 @@
             margin: 0;
             margin-left: 10px;
             margin-top: 10px;
-                       
             padding: 0;
         }
         .sidebar_child2{
@@ -68,6 +74,7 @@
             padding: 0;
             
         }
+        
         .dropdown {
             position: relative;
             display: inline-block;

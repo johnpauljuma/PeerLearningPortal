@@ -57,6 +57,7 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             background-color: #f9f9f9;
+            
         }
 
         /* Input Fields */
@@ -67,21 +68,26 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
+            font-family: tahoma;
         }
 
         /* Add Button */
         .add-button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: blue;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-family: tahoma;
+            font-weight: bold;
         }
 
         .add-button:hover {
-            background-color: #0056b3;
+            background-color: yellow;
+            color: blue;
+            box-shadow: 0 0 5px 0;
         }
     </style>
 </head>

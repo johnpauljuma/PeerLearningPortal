@@ -21,16 +21,6 @@ header {
         margin-top: 120px;
         margin-bottom: 2em;
     }
-    .image{
-            display: inline-flex;
-            background-color: grey;
-            border-radius: 50%;
-            height: fit-content;
-            width: fit-content;
-            float: left;
-            padding: 10px;
-            margin-left: 10px;
-    }
     
     .h1_header{
             display: inline-flex;
@@ -48,7 +38,7 @@ header {
 
 <header>
          
-        <div class="h1_header"><h1>Student Learning Portal</h1></div>
+        <div class="h1_header"><h1 class="">Student Learning Portal</h1></div>
 </header>
     
 </body>

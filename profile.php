@@ -8,19 +8,6 @@
     include './includes/sidebar.php';
     include './includes/configuration.php';
 
-    // Database configuration
-   /* $host = "localhost";
-    $username = "root"; 
-    $password = ""; 
-    $database = "student";
-
-    // Create a database connection
-    $conn = new mysqli($host, $username, $password, $database);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }*/
 
     // Get the user's ID from the session
     $user_id = $_SESSION['std_id']; // Use the student ID from the session
@@ -168,6 +155,7 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-family: tahoma;
         }
         
         #mobilenumber {
@@ -176,6 +164,7 @@
         .submit{
             float: right;
             width: fit-content;
+            
         }
         button{ 
             padding: 5px;
@@ -184,6 +173,7 @@
             background-color: white;
             font-size: large;
             font-weight: bold;
+            font-family: tahoma;
         }
         button:hover {
             background-color: blue;
