@@ -98,14 +98,12 @@
             align-items: center;
             max-width: 300px; 
             text-align: center; 
-
         }
         .fpw{
             width: 100%;
             margin: 0 auto;
             margin-top: 2em;
             text-decoration: none;
-            
         }
         a{
             text-decoration: none;

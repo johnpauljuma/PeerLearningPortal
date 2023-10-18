@@ -13,6 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin </title>
     <style>
+        .indexh2{
+            display: block;
+            column-span: 2;
+            background-color: grey;
+            width: 100%;
+            height: fit-content;
+        }
         .home{
             display: flex;
             justify-content: center;
@@ -21,6 +28,15 @@
             border-radius: 10px;
             box-shadow: 0 0 5px 0;
            
+        }
+        .home1{
+            display: inline-flex;
+            height: inherit;
+            width: 50%; 
+            margin: auto;
+            margin-left: 5px;
+            background-color: orange;
+
         }
         @media screen and (max-width: 768px) {
             body{
@@ -38,7 +54,9 @@
 </head>
 <body>
     <div class="home">
-        <h2>Welcome home</h2>
+        <div class="indexh2"><h2>Welcome home</h2></div>
+        <div class="home1"></div>
+        <div class="home1"></div>
     </div>
 <?php include 'admin_footer.php'?>
 </body>
