@@ -23,42 +23,41 @@
         $role = $_POST["role"];
         $date = $_POST["application_date"];
 
-        
         // Prepare and execute SQL query to insert data into the appropriate table
-        if ($role === "tutee") {
-            $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
-                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
-        } elseif ($role === "tutor") {
-            $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
-                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
+        if ($role === "tutee" || $role === "tutor") {
+            $sql = "INSERT INTO " . $role . "_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date, Date_updated)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssssssss", $student_id, $name, $course, $major, $year, $semester_year, $concentration, $role, $date, $date);
+
+            if ($stmt->execute()) {
+                echo "<script>
+                alert('Application Submitted successfully!')
+                window.location.href = 'application_history.php';
+                </script>";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $stmt->close();
         } else {
             // Handle the situation when the role is neither "tutee" nor "tutor"
             echo "<h2>Error: Invalid Role.</h2>";
             exit; // Exit the script
         }
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>
-            alert('Application Submitted successfully!')
-            window.location.href = 'application_history.php';
-            </script>";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
     }
 
-        // Fetch course codes from the 'courses' table
-        $courseCodes = array();
-        $query = "SELECT course_code FROM courses";
-        $result = $conn->query($query);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $courseCodes[] = $row["course_code"];
-            }
+    // Fetch course codes from the 'courses' table
+    $courseCodes = array();
+    $query = "SELECT course_code FROM courses";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $courseCodes[] = $row["course_code"];
         }
-        
-        // Close the database connection
-        $conn->close();
-
+    }
+    
+    // Close the database connection
+    $conn->close();
 ?>
 
 <!DOCTYPE html>

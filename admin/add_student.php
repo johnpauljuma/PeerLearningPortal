@@ -6,7 +6,6 @@
     include 'admin_sidebar.php';
     include 'configuration.php';
 
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
         $student_id = $_POST["student_id"];
@@ -17,31 +16,46 @@
         $semester_year = $_POST["semester_year"];
         $concentration = $_POST["concentration"];
         $role = $_POST["role"];
+        $date = $_POST["application_date"];
 
-        // Prepare and execute SQL query to insert data into the appropriate table
-        if ($role === "tutee") {
-            $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
-        } elseif ($role === "tutor") {
-            $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role)
-                    VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role')";
-        } else {
-            // Handle the situation when the role is neither "tutee" nor "tutor"
-            echo "<h2>Error: Invalid Role.</h2>";
-            exit; // Exit the script
+        // Check if student ID exists in tblregistration
+        $check_query = "SELECT * FROM tblregistration WHERE Student_ID = '$student_id'";
+        $result = $conn->query($check_query);
+        
+        // Student ID exists, proceed with the insert query
+        if ($result->num_rows > 0) {
+            
+            if ($role === "tutee") {
+                $sql = "INSERT INTO tutee_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                        VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
+            } elseif ($role === "tutor") {
+                $sql = "INSERT INTO tutor_applications (Student_ID, Full_Name, Course, Major, Year, Semester, Concentration, Role, Date)
+                        VALUES ('$student_id', '$name', '$course', '$major', '$year', '$semester_year', '$concentration', '$role', '$date')";
+            } 
+            else {
+                // Handle the situation when the role is neither "tutee" nor "tutor"
+                echo "<h2>Error: Invalid Role.</h2>";
+                exit; // Exit the script
+            }
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>
+                alert('Student Added successfully!')
+                window.location.href = 'add_student.php';
+                </script>";
+            } 
+            else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+         
+               }
+        } 
+        else {
+            // Student ID doesn't exist, display a pop-up showing the error
+            echo "<script>alert('Error: Student ID doesn't exist.');</script>";
         }
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>
-            alert('Student Added successfully!')
-            window.location.href = 'dashboard.php';
-            </script>";
-        } /*else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }*/
+    }
     else {
         // If the form was not submitted via POST, handle the situation accordingly
-        echo "<h2>Error: Form was not submitted.</h2>";
-    }
+        echo $conn->error;
     }
 
     // Close the database connection
@@ -55,7 +69,7 @@
     <title>Tute/Tutor Application</title>
     <style>
     body{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: Tahoma;
         }
     /* Style input text fields */
     input[type="text"], option{
@@ -87,14 +101,15 @@
 
     /* Style the submit button */
     input[type="submit"] {
-        background-color: #0C4E92;
-        color: white;
-        border: none;
-        padding: 10px 20px;
+        border: solid;
+        padding: 5px 10px;
+        box-shadow: 0 0 5px 0;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+        font-weight: bold;
+        font-family: tahoma;
         border-radius: 3px;
         cursor: pointer;
         width: fit-content;
@@ -103,6 +118,8 @@
     /* Change submit button color on hover */
     input[type="submit"]:hover {
         background-color: blue;
+        color: white;
+        border: solid blue;
     }
 
     /* Style the container */
@@ -176,6 +193,10 @@
                 <option value="tutee">Tutee</option>
                 <option value="tutor">Tutor</option>
             </select>
+
+                 <!-- Current Date -->
+            <label for="application_date">Application Date:</label>
+            <input type="date" id="application_date" name="application_date" readonly value="<?php echo date('Y-m-d'); ?>" required>
 
             <br><br>
 

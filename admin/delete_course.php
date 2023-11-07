@@ -15,7 +15,8 @@
                     alert('Course deleted successfully!');
                     window.location.href = 'manage_courses.php';
                 </script>";
-            } else {
+            } 
+            else {
                 echo "Error: " . $stmt->error;
             }
             $stmt->close();

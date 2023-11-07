@@ -19,6 +19,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>Admin | manage courses</title>
+
+    <script>
+       
+        
+    </script>
     <style>
         .container {
             height: fit-content;
@@ -83,12 +88,20 @@
             margin-left: 2em;
             border-radius: 10px;
             
-            
         }
         .match_student{
-            padding: 0 5px 0 5px;
+           
+            padding: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             border-radius: 10px;
             box-shadow: 0 0 5px 0;
+            background-color: orange;
+            
+        }
+        .match_student:hover{
+            background-color: blue;
         }
 
         .cover {
@@ -97,9 +110,6 @@
             margin-top: 1em;
         }
 
-        * {
-            box-sizing: border-box;
-        }
 
         .form_container {
             display: inline-flex;
@@ -143,11 +153,25 @@
             cursor: pointer;
         }
 
-        form.example button:hover {
-            background: #0b7dda;
+       form.example button:hover {
+            background: blue;
         }
 
-        form.example::after {
+        td button{
+            font-size: 16px;
+            font-family: tahoma;
+            border: 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 0 0 blue;
+        }
+
+        button:hover {
+            background: red;
+            cursor: pointer;
+        }
+
+       form.example::after {
             content: "";
             clear: both;
             display: table;
@@ -175,128 +199,196 @@
                 <th>Year of Study</th>
                 <th>Course</th>
                 <th>Drop</th>
-                <th>Select All<input type="checkbox" name="select_all" id="select_all"></th>
+                <th id="head">Select All<input type="checkbox" name="select_all" id="select_all"></th>
             </tr>
-            
+        
+
             <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["Student_ID"] . "</td>";
-                echo "<td>" . $row["Full_Name"] . "</td>";
-                echo "<td>" . $row["Year"] . "</td>";
-                echo "<td>" . $row["Course"] . "</td>";
-                echo "<td><a href='#'>Drop</a></td>";
-                echo "<td><input type='checkbox' name='select_row[]' class='row-checkbox' value='" . $row["Student_ID"] . "'></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>No data available</td></tr>";
-        }
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row["Student_ID"] . "</td>";
+                        echo "<td>" . $row["Full_Name"] . "</td>";
+                        echo "<td>" . $row["Year"] . "</td>";
+                        echo "<td>" . $row["Course"] . "</td>";
+                        echo "<td><button onclick='drop_tutor(" . $row["Student_ID"] . ")'>Drop</button></td>";
+                        echo "<td><input type='checkbox' name='select_row[]' class='row-checkbox' value='" . $row["Student_ID"] . "'></td>";
+                        echo "</tr>";
+                    }
+                } 
+                else {
+                    echo "<tr><td colspan='6'>No data available</td></tr>";
+                }
         ?>
     </table>
 
     <script>
-        //handling the checkboxes.
-    const selectAllCheckbox = document.getElementById('select_all');
-    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+       if(true){
+         //handling the checkboxes.
+         const selectAllCheckbox = document.getElementById('select_all');
+        const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+        const deselectAllText = 'Deselect All';
 
-    selectAllCheckbox.addEventListener('change', () => {
-        rowCheckboxes.forEach((checkbox) => {
-            checkbox.checked = selectAllCheckbox.checked;
-        });
-    });
-
-    let isPopupVisible = false; // Track whether the popup is currently displayed
-
-    // JavaScript function to handle match students button click
-    function matchStudents() {
-        if (isPopupVisible) {
-            // If the popup is already visible, remove it and change the button text
-            const popup = document.getElementById('matchingPopup');
-            if (popup) {
-                document.body.removeChild(popup);
-            }
-            isPopupVisible = false;
-            document.querySelector('.match_student h3').textContent = 'Match Student(s)';
-        } else {
-            // If the popup is not visible, create and display it
-            const selectedTutorIDs = [];
-            const rowCheckboxes = document.querySelectorAll('.row-checkbox:checked');
-
-            // Collect the selected tutor IDs
+        selectAllCheckbox.addEventListener('change', () => {
             rowCheckboxes.forEach((checkbox) => {
-                selectedTutorIDs.push(checkbox.value);
+                checkbox.checked = selectAllCheckbox.checked;
             });
 
-            if (selectedTutorIDs.length === 0) {
-                alert('Please select a tutor to match.');
-                return;
-            }
-
-            
-            // Send the selected tutor IDs to the server via AJAX for matching
-            // You will need to implement the server-side logic for matching here
-
-            // For demonstration purposes, display a pop-up with matching tutees
-            const matchingTutees = ['Tutee 1', 'Tutee 2', 'Tutee 3']; // Replace with actual matching results
-
-            if (matchingTutees.length === 0) {
-                alert('No matching tutees found.');
-                return;
-            }
-
-            const tuteeList = matchingTutees.map((tutee) => `<a href="#">${tutee}</a>`).join('<br>');
-
-            const popup = document.createElement('div');
-            popup.innerHTML = `<h3>Matching Tutees:</h3>${tuteeList}`;
-            popup.id = 'matchingPopup';
-            popup.style.padding = '20px';
-            popup.style.backgroundColor = 'blue';
-            popup.style.border = '1px solid #ccc';
-            popup.style.borderRadius = '10px';
-            popup.style.position = 'fixed';
-            popup.style.top = '50%';
-            popup.style.left = '50%';
-            popup.style.transform = 'translate(-50%, -50%)';
-            popup.style.zIndex = '1000';
-
-            document.body.appendChild(popup);
-            isPopupVisible = true;
-            document.querySelector('.match_student h3').textContent = 'Close ';
-        }
-    }
-
-    $(document).ready(function() {
-    // Function to handle search by ID or Name
-    function search() {
-        const searchText = $('#searchText').val().toLowerCase();
-        const rows = $('table tbody tr');
-
-        rows.each(function() {
-            const idCell = $(this).find('td:first-child');
-            const nameCell = $(this).find('td:nth-child(2)');
-            const idText = idCell.text().toLowerCase();
-            const nameText = nameCell.text().toLowerCase();
-
-            if (idText.includes(searchText) || nameText.includes(searchText)) {
-                $(this).css('background-color', 'yellow'); // Highlight matching rows
-            } else {
-                $(this).css('background-color', ''); // Clear highlighting
+        if (selectAllCheckbox.checked) {
+                document.getElementById('head').innerHTML = deselectAllText;
+            } 
+            else {
+                document.getElementById('head').innerHTML = 'Select All<input type="checkbox" name="select_all" id="select_all">';
             }
         });
-    }
 
-    // Event listener for search input
-    $('#searchText').on('input', search);
-});
+        rowCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                let allChecked = true;
+                rowCheckboxes.forEach((cb) => {
+                    if (!cb.checked) {
+                        allChecked = false;
+                    }
+                });
+                if (allChecked) {
+                    document.getElementById('head').innerHTML = deselectAllText;
+                } else {
+                    document.getElementById('head').innerHTML = 'Select All<input type="checkbox" name="select_all" id="select_all">';
+                }
+            });
+        });
 
-</script>
-<?php include 'admin_footer.php'?>
+        //Event listener for the "Deselect All" text
+        const deselectAllElement = document.getElementById('head');
+        deselectAllElement.addEventListener('mouseover', () => {
+            if (deselectAllElement.textContent === deselectAllText) {
+                deselectAllElement.style.backgroundColor = 'blue';
+                deselectAllElement.style.color = 'white';
+                deselectAllElement.style.cursor = 'pointer';
+            }
+        });
+
+        deselectAllElement.addEventListener('mouseout', () => {
+            deselectAllElement.style.backgroundColor = '';
+            deselectAllElement.style.color = '';
+        });
+
+        deselectAllElement.addEventListener('click', () => {
+            if (deselectAllElement.textContent === deselectAllText) {
+                rowCheckboxes.forEach((checkbox) => {
+                    checkbox.checked = false;
+                });
+                selectAllCheckbox.checked = false;
+                deselectAllElement.innerHTML = 'Select All<input type="checkbox" name="select_all" id="select_all">';
+            }
+        });
+
+       }
+       else{
+            selectAllCheckbox.addEventListener('change', () => {
+                rowCheckboxes.forEach((checkbox) => {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            });
+       }
+        
+
+        let isPopupVisible = false; // Track whether the popup is currently displayed
+
+        // JavaScript function to handle match students button click
+        function matchStudents() {
+            if (isPopupVisible) {
+                // If the popup is already visible, remove it and change the button text
+                const popup = document.getElementById('matchingPopup');
+                if (popup) {
+                    document.body.removeChild(popup);
+                }
+                isPopupVisible = false;
+                document.querySelector('.match_student h3').textContent = 'Match Student(s)';
+            } else {
+                // If the popup is not visible, create and display it
+                const selectedTutorIDs = [];
+                const rowCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+
+                // Collect the selected tutor IDs
+                rowCheckboxes.forEach((checkbox) => {
+                    selectedTutorIDs.push(checkbox.value);
+                });
+
+                if (selectedTutorIDs.length === 0) {
+                    alert('Please select a tutor to match.');
+                    return;
+                }
+
+                
+                // Send the selected tutor IDs to the server via AJAX for matching
+                // You will need to implement the server-side logic for matching here
+
+                // For demonstration purposes, display a pop-up with matching tutees
+                const matchingTutees = ['Tutee 1', 'Tutee 2', 'Tutee 3']; // Replace with actual matching results
+
+                if (matchingTutees.length === 0) {
+                    alert('No matching tutees found.');
+                    return;
+                }
+
+                const tuteeList = matchingTutees.map((tutee) => `<a href="#">${tutee}</a>`).join('<br>');
+
+                const popup = document.createElement('div');
+                popup.innerHTML = `<h3>Matching Tutees:</h3>${tuteeList}`;
+                popup.id = 'matchingPopup';
+                popup.style.padding = '20px';
+                popup.style.backgroundColor = 'blue';
+                popup.style.border = '1px solid #ccc';
+                popup.style.borderRadius = '10px';
+                popup.style.position = 'fixed';
+                popup.style.top = '50%';
+                popup.style.left = '50%';
+                popup.style.transform = 'translate(-50%, -50%)';
+                popup.style.zIndex = '1000';
+
+                document.body.appendChild(popup);
+                isPopupVisible = true;
+                document.querySelector('.match_student h3').textContent = 'Close ';
+            }
+        }
+
+        $(document).ready(function() {
+        // Function to handle search by ID or Name
+        function search() {
+            const searchText = $('#searchText').val().toLowerCase();
+            const rows = $('table tbody tr');
+
+            rows.each(function() {
+                const idCell = $(this).find('td:first-child');
+                const nameCell = $(this).find('td:nth-child(2)');
+                const idText = idCell.text().toLowerCase();
+                const nameText = nameCell.text().toLowerCase();
+
+                if (idText.includes(searchText) || nameText.includes(searchText)) {
+                    $(this).css('background-color', 'yellow'); // Highlight matching rows
+                } else {
+                    $(this).css('background-color', ''); // Clear highlighting
+                }
+            });
+        }
+
+        // Event listener for search input
+        $('#searchText').on('input', search);
+        });
+
+
+        // JavaScript function to confirm student deletion
+        function drop_tutor(Student_ID) {
+            if (confirm('Are you sure you want to delete this Student?')) {
+                window.location.href = 'drop_tutor.php?Student_ID=' + Student_ID;
+            }
+        }
+    </script>
+    <?php include 'admin_footer.php';
+
+    // Close the database connection
+    $conn->close();
+    ?>
 </body>
 </html>
-
-<?php
-// Close the database connection
-$conn->close();
-?>

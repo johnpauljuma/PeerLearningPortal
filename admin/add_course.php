@@ -44,6 +44,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Admin | add course</title>
     <style>
         /* Form Container */
         .form-container {
@@ -90,10 +91,10 @@
             
             <input type="text" class="form-input" id="courseCode" name="courseCode" placeholder="Course Code" required>
 
-           
             <input type="text" class="form-input" id="courseName" name="courseName" placeholder="Course Name" required>
 
             <input type="text" class="form-input" id="school" name="school" placeholder="School" required>
+
 
             <button type="submit" class="add-button">Add</button>
         </form>

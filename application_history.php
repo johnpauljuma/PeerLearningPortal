@@ -54,8 +54,15 @@
     <div class="table_container">
         <table>
             <th>Application Date</th>
+            <th>Student ID</th>
+            <th>Name</th>
             <th>Course Code</th>
+            <th>Major</th>
+            <th>Year</th>
+            <th>Semester</th>
+            <th>Concentration</th>
             <th>Role</th>
+            <th>Edit</th>
             <th>Status</th>
 
             <?php
@@ -63,8 +70,15 @@
             while ($row = $tuteeResult->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["Date"] . "</td>";
+                echo "<td>" . $row["Student_ID"] . "</td>";
+                echo "<td>" . $row["Full_Name"] . "</td>" ;
                 echo "<td>" . $row["Course"] . "</td>";
+                echo "<td>" . $row["Major"] . "</td>";
+                echo "<td>" . $row["Year"] . "</td>";
+                echo "<td>" . $row["Semester"] . "</td>";
+                echo "<td>" . $row["Concentration"] . "</td>";
                 echo "<td>Tutee</td>";
+                echo "<td><a href='edit_tutee_application.php'>Edit</a></td>";
                 echo "<td>Matched</td>";
                 echo "</tr>";
             }
@@ -73,10 +87,17 @@
             while ($row = $tutorResult->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["Date"] . "</td>";
+                echo "<td>" . $row["Student_ID"] . "</td>";
+                echo "<td>" . $row["Full_Name"] . "</td>" ;
                 echo "<td>" . $row["Course"] . "</td>";
+                echo "<td>" . $row["Major"] . "</td>";
+                echo "<td>" . $row["Year"] . "</td>";
+                echo "<td>" . $row["Semester"] . "</td>";
+                echo "<td>" . $row["Concentration"] . "</td>";
                 echo "<td>Tutor</td>";
+                echo "<td><a href='edit_tutor_application.php'>Edit</a></td>";
                 echo "<td>Matched</td>";
-                echo "</tr>";
+                echo "</tr>"; 
             }
             ?>
         </table>
