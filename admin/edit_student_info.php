@@ -1,28 +1,22 @@
 <?php 
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    
-    session_start();
 
-    include './includes/header.php';
-    include './includes/sidebar.php';
-    include './includes/configuration.php';
+    include 'admin_header.php';
+    include 'admin_sidebar.php';
+    include 'configuration.php';
 
-
-    // Get the user's ID from the session
-    $user_id = $_SESSION['std_id']; 
-
+    $id = $_GET['id'];
 
     // Prepare and execute a SELECT query to retrieve user data
-    $query = $conn->prepare("SELECT * FROM tblregistration WHERE Student_ID = ?");
-    $query->bind_param("s", $user_id);
+    $query = $conn->prepare("SELECT * FROM tblregistration WHERE id = ?");
+    $query->bind_param("i", $id);
     $query->execute();
     $result = $query->get_result();
 
     if ($result) {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $id = $row['id'];
             $std_id = $row['Student_ID'];
             $full_name = $row['Full_Name'];
             $email = $row['Email'];
@@ -35,28 +29,28 @@
         
     }
     
-    // Handle form submission
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $new_std_id = $_POST['std_id'];
-        $new_full_name = $_POST['full_name'];
-        $new_email = $_POST['email'];
+   // Handle form submission
+   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $new_std_id = $_POST['std_id'];
+    $new_full_name = $_POST['full_name'];
+    $new_email = $_POST['email'];
 
-        
-        $updateQuery = $conn->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
-        $updateQuery->bind_param("sssi", $new_std_id, $new_full_name, $new_email, $user_id);
+    
+    $updateQuery = $conn->prepare("UPDATE tblregistration SET Student_ID=?, Full_Name=?, Email=? WHERE Student_ID = ?");
+    $updateQuery->bind_param("sssi", $new_std_id, $new_full_name, $new_email, $user_id);
 
-        if ($updateQuery->execute()) {
-            $_SESSION['std_id'] = $new_std_id;
-            echo "<script>
-                alert('Student Information Updated successfully!')
-                window.location.href = 'profile.php';
-            </script>";
-        } else {
-            // Update failed
-            echo "Error updating Student information: " . $conn->error;
-        }
+    if ($updateQuery->execute()) {
+        $_SESSION['std_id'] = $new_std_id;
+        echo "<script>
+            alert('Student Information Updated successfully!')
+            window.location.href = 'manage_students.php';
+        </script>";
+    } else {
+        // Update failed
+        echo "Error updating Student information: " . $conn->error;
     }
-  
+}
+    
 
     // Close the database connection
     $conn->close();
@@ -182,7 +176,7 @@
         <div class="heading"><h2>Update Student Information</h2></div>
 
         <div class="form_holder">
-        <form method="post" action="profile.php">
+        <form method="post" action="edit_student_info.php">
         <table border="0">
             <tr>
             <div class="input-row">

@@ -199,9 +199,20 @@
                 <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
                 <div class="sidebar_child2"><a href="#" class="sidebar-option">Students &#9662;</a></div>
                 <div class="dropdown-content">
+                    <div class="a"><a href="register_student.php">Register Student</a></div>
+                    <div class="a"><a href="manage_students.php">Manage Students</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar_container">
+                <div class="dropdown" onclick="toggleDropdown(this)">
+                <div class="sidebar_child1"><i class="fa fa-address-card-o" style="font-size:24px"></i></div>
+                <div class="sidebar_child2"><a href="#" class="sidebar-option">Program &#9662;</a></div>
+                <div class="dropdown-content">
                     <div class="a"><a href="add_student.php">Add Student</a></div>
-                    <div class="a"><a href="tutee_applications.php">Tutee</a></div>
-                    <div class="a"><a href="tutor_applications.php">Tutor</a></div>
+                    <div class="a"><a href="tutee_applications.php">Tutees</a></div>
+                    <div class="a"><a href="tutor_applications.php">Tutors</a></div>
                     <div class="a"><a href="matched.php">Matched students</a></div>
                     <div class="a"><a href="pending.php">Pending Students</a></div>
                 </div>
